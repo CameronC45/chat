@@ -28,4 +28,14 @@ public class UserPojo {
     public String getEmail() {
         return email;
     }
+
+    @Override
+    public String toString() {
+        return "UserPojo{" +
+                "user_id='" + user_id + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

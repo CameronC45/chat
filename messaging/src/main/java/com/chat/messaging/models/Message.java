@@ -1,4 +1,7 @@
 package com.chat.messaging.models;
 
-public class Message {
+import com.chat.messaging.pojo.MessagePojo;
+
+
+public class Message extends MessagePojo {
 }
