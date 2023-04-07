@@ -40,5 +40,14 @@ public class MessagePojo {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         return timeStamp.format(formatter);
     }
-
+    @Override
+    public String toString() {
+        return "MessagePojo{" +
+                "message_id='" + message_id + '\'' +
+                ", sender_id='" + sender_id + '\'' +
+                ", recipient_id='" + recipient_id + '\'' +
+                ", content='" + content + '\'' +
+                ", timeStamp=" + timeStamp +
+                '}';
+    }
 }
