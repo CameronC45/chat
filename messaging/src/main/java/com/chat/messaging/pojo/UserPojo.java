@@ -1,6 +1,7 @@
 package com.chat.messaging.pojo;
 
-public class UserPojo {
+public class
+UserPojo {
     private final String user_id;
     private final String username;
     private final String password;

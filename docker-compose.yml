@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  messaging-service:
+    build: "./messaging"
+    depends_on:
+      - messaging-service-db
+    environment:
+      - DB_URI=postgres://user:password@messaging-service-db/db?charset=UTF8
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./messaging-service:/opt/app
+
+  messaging-service-db:
+    environment:
+      - PSQL_ROOT_PASSWORD=password
+      - PSQL_DATABASE=db
+    image: postgres:latest
+    ports:
+      - "0.0.0.0:7200:5432"
