@@ -20,7 +20,7 @@ public class MessageRestController {
     }
 
     @PostMapping(consumes = {"application/json"})
-    public Message createUser(@RequestBody Message message){
+    public Message createMessage(@RequestBody Message message){
         return repository.save(message);
     }
 }
