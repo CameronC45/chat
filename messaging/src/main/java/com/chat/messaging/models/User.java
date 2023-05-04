@@ -11,6 +11,8 @@ import jakarta.persistence.Table;
 public class User extends UserPojo {
 
 
+    public User(){}
+
     public User(String email, String username, String password) {
         super(email, username, password);
     }

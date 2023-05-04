@@ -6,6 +6,8 @@ public class UserPojo {
     private String username;
     private String password;
 
+    public UserPojo(){}
+
     public UserPojo(String email, String username, String password) {
         this.email = email;
         this.username = username;

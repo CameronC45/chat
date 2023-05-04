@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/chat.iml" filepath="$PROJECT_DIR$/.idea/chat.iml" />
-      <module fileurl="file://$PROJECT_DIR$/messaging/messaging.iml" filepath="$PROJECT_DIR$/messaging/messaging.iml" />
     </modules>
   </component>
 </project>
