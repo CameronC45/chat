@@ -8,25 +8,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MessagingApplication implements CommandLineRunner {
-	private final MessageRepository messageRepository;
+public class MessagingApplication  {
 
-	@Autowired
-	public MessagingApplication(MessageRepository messageRepository) {
-		this.messageRepository = messageRepository;
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(MessagingApplication.class, args);
-	}
-
-	@Override
-	public void run(String... args) throws Exception {
-		testMessageRepository();
-	}
-
-	public void testMessageRepository(){
-		messageRepository.save(new Message("11111111","8778878","hello"));
 	}
 
 }
