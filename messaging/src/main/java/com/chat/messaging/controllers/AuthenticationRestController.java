@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/login")
 public class AuthenticationRestController {
 
     @Autowired
@@ -30,7 +30,7 @@ public class AuthenticationRestController {
     @Autowired
     private JwtUtil jwt;
 
-    @PostMapping("/login")
+    @PostMapping
     public ResponseEntity<?> createAuthenticationToken(@RequestBody User user){
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
