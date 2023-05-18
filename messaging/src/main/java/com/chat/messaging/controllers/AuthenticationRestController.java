@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,14 +29,23 @@ public class AuthenticationRestController {
     private MyUserDetailsService userDetailsService;
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     private JwtUtil jwt;
 
     @PostMapping
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody User user){
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody User user) {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+            UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+            boolean passwordMatches = passwordEncoder.matches(user.getPassword(), userDetails.getPassword());
+            if (passwordMatches) {
+                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+            } else {
+                return ResponseEntity.badRequest().body("Invalid username or password");
+            }
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Invalid username or email");
+            return ResponseEntity.badRequest().body("Invalid username or email " + e);
         }
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());

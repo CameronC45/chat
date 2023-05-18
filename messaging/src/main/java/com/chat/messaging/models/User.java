@@ -43,7 +43,7 @@ public class User extends UserPojo {
         super.setUsername(username);
     }
 
-    @Column(name = "password", nullable = false, length = 50)
+    @Column(name = "password", nullable = false, length = 72)
     @Override
     public String getPassword() {
         return super.getPassword();

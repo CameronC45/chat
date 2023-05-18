@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 
@@ -17,6 +18,9 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findById(username);
@@ -26,7 +30,7 @@ public class MyUserDetailsService implements UserDetailsService {
         }
 
         UserBuilder userBuilder = org.springframework.security.core.userdetails.User.withUsername(username);
-        userBuilder.password(user.get().getPassword());
+        userBuilder.password(passwordEncoder.encode(user.get().getPassword()));
         userBuilder.roles("USER");
 
         return userBuilder.build();
