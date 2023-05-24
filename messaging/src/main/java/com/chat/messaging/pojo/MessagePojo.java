@@ -4,43 +4,43 @@ import java.time.LocalDateTime;
 
 public class MessagePojo {
 
-    private Long message_id;
-    private String sender_id;
-    private String recipient_id;
+    private Long messageId;
+    private String senderId;
+    private String recipientId;
     private String content;
     private LocalDateTime timeStamp;
 
     public MessagePojo() {}
 
-    public MessagePojo(String sender_id, String recipient_id, String content) {
-        this.sender_id = sender_id;
-        this.recipient_id = recipient_id;
+    public MessagePojo(String senderId, String recipientId, String content) {
+        this.senderId = senderId;
+        this.recipientId = recipientId;
         this.content = content;
         this.timeStamp = LocalDateTime.now();
     }
 
-    public Long getMessage_id() {
-        return message_id;
+    public Long getMessageId() {
+        return messageId;
     }
 
-    public void setMessage_id(Long message_id) {
-        this.message_id = message_id;
+    public void setMessageId(Long messageId) {
+        this.messageId = messageId;
     }
 
-    public String getSender_id() {
-        return sender_id;
+    public String getSenderId() {
+        return senderId;
     }
 
-    public void setSender_id(String sender_id) {
-        this.sender_id = sender_id;
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
     }
 
-    public String getRecipient_id() {
-        return recipient_id;
+    public String getRecipientId() {
+        return recipientId;
     }
 
-    public void setRecipient_id(String recipient_id) {
-        this.recipient_id = recipient_id;
+    public void setRecipientId(String recipientId) {
+        this.recipientId = recipientId;
     }
 
     public String getContent() {
@@ -62,9 +62,9 @@ public class MessagePojo {
     @Override
     public String toString() {
         return "MessagePojo{" +
-                "message_id='" + message_id + '\'' +
-                ", sender_id='" + sender_id + '\'' +
-                ", recipient_id='" + recipient_id + '\'' +
+                "messageId='" + messageId + '\'' +
+                ", senderId='" + senderId + '\'' +
+                ", recipientId='" + recipientId + '\'' +
                 ", content='" + content + '\'' +
                 ", timeStamp=" + timeStamp +
                 '}';

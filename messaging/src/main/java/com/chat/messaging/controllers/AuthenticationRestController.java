@@ -45,7 +45,7 @@ public class AuthenticationRestController {
                 return ResponseEntity.badRequest().body("Invalid username or password");
             }
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Invalid username or email " + e);
+            return ResponseEntity.badRequest().body(e);
         }
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());

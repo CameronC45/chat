@@ -18,22 +18,19 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findById(username);
+        Optional<User> user = userRepository.findByUsername(username);
 
         if(user.isEmpty()){
             throw new UsernameNotFoundException("User not found");
         }
 
-        UserBuilder userBuilder = org.springframework.security.core.userdetails.User.withUsername(username);
-        userBuilder.password(passwordEncoder.encode(user.get().getPassword()));
-        userBuilder.roles("USER");
-
-        return userBuilder.build();
-
+        User retrievedUser = user.get();
+        return org.springframework.security.core.userdetails.User
+                .withUsername(retrievedUser.getUsername())
+                .password(retrievedUser.getPassword())
+                .roles("USER")
+                .build();
     }
 }

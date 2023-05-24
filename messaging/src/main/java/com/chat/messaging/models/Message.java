@@ -11,46 +11,31 @@ public class Message extends MessagePojo {
 
     public Message() {}
 
-    public Message(String sender_id, String recipient_id, String content) {
-        super(sender_id, recipient_id, content);
+    public Message(String senderId, String recipientId, String content) {
+        super(senderId, recipientId, content);
     }
 
     public Message(MessagePojo messagePojo) {
-        this(messagePojo.getSender_id(), messagePojo.getRecipient_id(), messagePojo.getContent());
+        this(messagePojo.getSenderId(), messagePojo.getRecipientId(), messagePojo.getContent());
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Override
-    public Long getMessage_id() {
-        return super.getMessage_id();
-    }
-
-    @Override
-    public void setMessage_id(Long message_id) {
-        super.setMessage_id(message_id);
+    public Long getMessageId() {
+        return super.getMessageId();
     }
 
     @Column(name = "sender_id", nullable = false, length = 50)
     @Override
-    public String getSender_id() {
-        return super.getSender_id();
-    }
-
-    @Override
-    public void setSender_id(String sender_id) {
-        super.setSender_id(sender_id);
+    public String getSenderId() {
+        return super.getSenderId();
     }
 
     @Column(name = "recipient_id", nullable = false, length = 50)
     @Override
-    public String getRecipient_id() {
-        return super.getRecipient_id();
-    }
-
-    @Override
-    public void setRecipient_id(String recipient_id) {
-        super.setRecipient_id(recipient_id);
+    public String getRecipientId() {
+        return super.getRecipientId();
     }
 
     @Column(name = "content", nullable = false, length = 1000)
@@ -59,19 +44,10 @@ public class Message extends MessagePojo {
         return super.getContent();
     }
 
-    @Override
-    public void setContent(String content) {
-        super.setContent(content);
-    }
-
     @Column(name = "time_stamp")
     @Override
     public LocalDateTime getTimeStamp() {
         return super.getTimeStamp();
     }
 
-    @Override
-    public void setTimeStamp(LocalDateTime timeStamp){
-        super.setTimeStamp(timeStamp);
-    }
 }

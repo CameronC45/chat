@@ -27,20 +27,10 @@ public class User extends UserPojo {
         return super.getEmail();
     }
 
-    @Override
-    public void setEmail(String email) {
-        super.setEmail(email);
-    }
-
     @Column(name = "username", unique = true, nullable = false, length = 100)
     @Override
     public String getUsername() {
         return super.getUsername();
-    }
-
-    @Override
-    public void setUsername(String username) {
-        super.setUsername(username);
     }
 
     @Column(name = "password", nullable = false, length = 72)
@@ -49,8 +39,5 @@ public class User extends UserPojo {
         return super.getPassword();
     }
 
-    @Override
-    public void setPassword(String password) {
-        super.setPassword(password);
-    }
+
 }

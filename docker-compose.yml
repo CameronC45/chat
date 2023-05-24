@@ -13,8 +13,6 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     ports:
       - "8080:8080"
-    volumes:
-      - ./messaging:/opt/app
     networks:
       - messaging-network
 
