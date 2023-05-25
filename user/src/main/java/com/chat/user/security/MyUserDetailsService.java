@@ -1,14 +1,12 @@
-package com.chat.messaging.security;
+package com.chat.user.security;
 
-import com.chat.messaging.models.User;
-import com.chat.messaging.repository.UserRepository;
+import com.chat.user.models.User;
+import com.chat.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.security.core.userdetails.User.UserBuilder;
 
 import java.util.Optional;
 

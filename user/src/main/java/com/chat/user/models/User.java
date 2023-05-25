@@ -1,6 +1,6 @@
-package com.chat.messaging.models;
+package com.chat.user.models;
 
-import com.chat.messaging.pojo.UserPojo;
+import com.chat.user.pojo.UserPojo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

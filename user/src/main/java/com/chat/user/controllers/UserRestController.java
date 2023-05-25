@@ -1,7 +1,7 @@
-package com.chat.messaging.controllers;
+package com.chat.user.controllers;
 
-import com.chat.messaging.models.User;
-import com.chat.messaging.repository.UserRepository;
+import com.chat.user.models.User;
+import com.chat.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/users")
 public class UserRestController {
 
     @Autowired
@@ -21,7 +21,7 @@ public class UserRestController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @PostMapping(consumes = {"application/json"})
+    @PostMapping
     public User createUser(@RequestBody User user){
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);

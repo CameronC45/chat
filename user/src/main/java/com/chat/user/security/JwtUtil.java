@@ -1,4 +1,4 @@
-package com.chat.messaging.security;
+package com.chat.user.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

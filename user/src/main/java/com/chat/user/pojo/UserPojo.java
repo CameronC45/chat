@@ -1,4 +1,4 @@
-package com.chat.messaging.pojo;
+package com.chat.user.pojo;
 
 public class UserPojo {
 

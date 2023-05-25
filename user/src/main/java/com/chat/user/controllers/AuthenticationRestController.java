@@ -1,5 +1,9 @@
-package com.chat.messaging.controllers;
+package com.chat.user.controllers;
 
+import com.chat.user.models.User;
+import com.chat.user.repository.UserRepository;
+import com.chat.user.security.JwtUtil;
+import com.chat.user.security.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/auth")
 public class AuthenticationRestController {
 
     @Autowired
@@ -30,7 +34,7 @@ public class AuthenticationRestController {
     @Autowired
     private JwtUtil jwt;
 
-    @PostMapping
+    @PostMapping("/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody User user) {
         try {
             UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
