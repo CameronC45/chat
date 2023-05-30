@@ -9,6 +9,10 @@ import java.time.LocalDateTime;
 @Table(name = "messages")
 public class Message extends MessagePojo {
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id", referencedColumnName = "room_id")
+    private ChatRoom chatRoom;
+
     public Message() {}
 
     public Message(String senderId, String recipientId, String content) {
@@ -16,7 +20,7 @@ public class Message extends MessagePojo {
     }
 
     public Message(MessagePojo messagePojo) {
-        this(messagePojo.getSenderId(), messagePojo.getRecipientId(), messagePojo.getContent());
+        this(messagePojo.getSenderId(), messagePojo.getRoomId(), messagePojo.getContent());
     }
 
     @Id
@@ -32,10 +36,10 @@ public class Message extends MessagePojo {
         return super.getSenderId();
     }
 
-    @Column(name = "recipient_id", nullable = false, length = 50)
+    @Column(name = "room_id", nullable = false, length = 50)
     @Override
-    public String getRecipientId() {
-        return super.getRecipientId();
+    public String getRoomId() {
+        return super.getRoomId();
     }
 
     @Column(name = "content", nullable = false, length = 1000)
@@ -44,10 +48,10 @@ public class Message extends MessagePojo {
         return super.getContent();
     }
 
-    @Column(name = "time_stamp")
+    @Column(name = "sent_at")
     @Override
-    public LocalDateTime getTimeStamp() {
-        return super.getTimeStamp();
+    public LocalDateTime getSentAt() {
+        return super.getSentAt();
     }
 
 }

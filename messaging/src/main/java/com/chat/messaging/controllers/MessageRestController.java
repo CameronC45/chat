@@ -14,12 +14,12 @@ public class MessageRestController {
     @Autowired
     private MessageRepository repository;
 
-    @GetMapping(produces = {"application/json"})
+    @GetMapping
     public List<Message> getAllMessages(){
         return repository.findAll();
     }
 
-    @PostMapping(consumes = {"application/json"})
+    @PostMapping
     public Message createMessage(@RequestBody Message message){
         return repository.save(message);
     }

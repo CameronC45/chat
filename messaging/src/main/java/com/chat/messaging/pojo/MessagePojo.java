@@ -6,17 +6,17 @@ public class MessagePojo {
 
     private Long messageId;
     private String senderId;
-    private String recipientId;
+    private String roomId;
     private String content;
-    private LocalDateTime timeStamp;
+    private LocalDateTime sentAt;
 
     public MessagePojo() {}
 
-    public MessagePojo(String senderId, String recipientId, String content) {
+    public MessagePojo(String senderId, String roomId, String content) {
         this.senderId = senderId;
-        this.recipientId = recipientId;
+        this.roomId = roomId;
         this.content = content;
-        this.timeStamp = LocalDateTime.now();
+        this.sentAt = LocalDateTime.now();
     }
 
     public Long getMessageId() {
@@ -35,12 +35,12 @@ public class MessagePojo {
         this.senderId = senderId;
     }
 
-    public String getRecipientId() {
-        return recipientId;
+    public String getRoomId() {
+        return roomId;
     }
 
-    public void setRecipientId(String recipientId) {
-        this.recipientId = recipientId;
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
     }
 
     public String getContent() {
@@ -51,12 +51,12 @@ public class MessagePojo {
         this.content = content;
     }
 
-    public LocalDateTime getTimeStamp() {
-        return timeStamp;
+    public LocalDateTime getSentAt() {
+        return sentAt;
     }
 
-    public void setTimeStamp(LocalDateTime timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setSentAt(LocalDateTime sentAt) {
+        this.sentAt = sentAt;
     }
 
     @Override
@@ -64,9 +64,9 @@ public class MessagePojo {
         return "MessagePojo{" +
                 "messageId='" + messageId + '\'' +
                 ", senderId='" + senderId + '\'' +
-                ", recipientId='" + recipientId + '\'' +
+                ", roomId='" + roomId + '\'' +
                 ", content='" + content + '\'' +
-                ", timeStamp=" + timeStamp +
+                ", sentAt=" + sentAt +
                 '}';
     }
 }
