@@ -5,12 +5,10 @@ import java.time.LocalDateTime;
 public class ParticipantPojo {
 
     private String participantId;
-    private String roomId;
     private String userId;
     private LocalDateTime joinedAt;
 
-    public ParticipantPojo(String roomId, String userId) {
-        this.roomId = roomId;
+    public ParticipantPojo(String userId) {
         this.userId = userId;
         this.joinedAt = LocalDateTime.now();
     }
@@ -21,14 +19,6 @@ public class ParticipantPojo {
 
     public void setParticipantId(String participantId) {
         this.participantId = participantId;
-    }
-
-    public String getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(String roomId) {
-        this.roomId = roomId;
     }
 
     public String getUserId() {
@@ -51,7 +41,6 @@ public class ParticipantPojo {
     public String toString() {
         return "ParticipantPojo{" +
                 "participantId='" + participantId + '\'' +
-                ", roomId='" + roomId + '\'' +
                 ", userId='" + userId + '\'' +
                 ", joinedAt=" + joinedAt +
                 '}';

@@ -5,22 +5,24 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "messages")
+//
+//@Entity
+//@Table(name = "messages")
 public class Message extends MessagePojo {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id", referencedColumnName = "room_id")
+    @JoinColumn(name = "room_id", referencedColumnName = "room_id", nullable = false)
     private ChatRoom chatRoom;
 
     public Message() {}
 
-    public Message(String senderId, String recipientId, String content) {
-        super(senderId, recipientId, content);
+    public Message(String senderId, String content, ChatRoom chatRoom) {
+        super(senderId, content);
+        this.chatRoom = chatRoom;
     }
 
-    public Message(MessagePojo messagePojo) {
-        this(messagePojo.getSenderId(), messagePojo.getRoomId(), messagePojo.getContent());
+    public Message(MessagePojo messagePojo, ChatRoom chatRoom) {
+        this(messagePojo.getSenderId(), messagePojo.getContent(), chatRoom);
     }
 
     @Id
@@ -36,12 +38,6 @@ public class Message extends MessagePojo {
         return super.getSenderId();
     }
 
-    @Column(name = "room_id", nullable = false, length = 50)
-    @Override
-    public String getRoomId() {
-        return super.getRoomId();
-    }
-
     @Column(name = "content", nullable = false, length = 1000)
     @Override
     public String getContent() {
@@ -52,6 +48,14 @@ public class Message extends MessagePojo {
     @Override
     public LocalDateTime getSentAt() {
         return super.getSentAt();
+    }
+
+    public ChatRoom getChatRoom(){
+        return chatRoom;
+    }
+
+    public void setChatRoom(ChatRoom chatRoom){
+        this.chatRoom = chatRoom;
     }
 
 }

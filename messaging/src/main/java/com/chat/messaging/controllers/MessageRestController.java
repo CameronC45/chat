@@ -1,26 +1,41 @@
 package com.chat.messaging.controllers;
 
+import com.chat.messaging.models.ChatRoom;
 import com.chat.messaging.models.Message;
+import com.chat.messaging.pojo.MessagePojo;
+import com.chat.messaging.repository.ChatRoomRepository;
 import com.chat.messaging.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/messaging")
 public class MessageRestController {
 
     @Autowired
-    private MessageRepository repository;
+    private MessageRepository messageRepository;
+    @Autowired
+    private ChatRoomRepository chatRoomRepository;
 
     @GetMapping
     public List<Message> getAllMessages(){
-        return repository.findAll();
+        return messageRepository.findAll();
     }
 
-    @PostMapping
-    public Message createMessage(@RequestBody Message message){
-        return repository.save(message);
+    @PostMapping("/{id}")
+    public Message createMessage(@PathVariable("id") String id, @RequestBody MessagePojo messagePojo){
+
+        Optional<ChatRoom> chatRoom = chatRoomRepository.findById(id);
+
+        if(chatRoom.isEmpty()){
+            throw new IllegalArgumentException("ChatRoom with roomId " + id + " does not exist.");
+        }
+
+        Message message = new Message(messagePojo, chatRoom.get());
+
+        return messageRepository.save(message);
     }
 }

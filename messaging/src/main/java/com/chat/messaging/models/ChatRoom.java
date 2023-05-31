@@ -22,7 +22,7 @@ public class ChatRoom extends ChatRoomPojo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Override
-    public String getRoomId() {
+    public Long getRoomId() {
         return super.getRoomId();
     }
 
