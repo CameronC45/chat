@@ -1,53 +1,73 @@
 package com.chat.messaging.models;
 
-import com.chat.messaging.pojo.MessagePojo;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
-//
-//@Entity
-//@Table(name = "messages")
-public class Message extends MessagePojo {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id", referencedColumnName = "room_id", nullable = false)
-    private ChatRoom chatRoom;
-
-    public Message() {}
-
-    public Message(String senderId, String content, ChatRoom chatRoom) {
-        super(senderId, content);
-        this.chatRoom = chatRoom;
-    }
-
-    public Message(MessagePojo messagePojo, ChatRoom chatRoom) {
-        this(messagePojo.getSenderId(), messagePojo.getContent(), chatRoom);
-    }
+@Entity
+@Table(name = "messages")
+public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Override
-    public Long getMessageId() {
-        return super.getMessageId();
-    }
-
+    private Long messageId;
     @Column(name = "sender_id", nullable = false, length = 50)
-    @Override
-    public String getSenderId() {
-        return super.getSenderId();
-    }
-
+    private String senderId;
     @Column(name = "content", nullable = false, length = 1000)
-    @Override
-    public String getContent() {
-        return super.getContent();
+    private String content;
+    @Column(name = "sent_at")
+    private LocalDateTime sentAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id")
+    @JsonBackReference
+    private ChatRoom chatRoom;
+
+    @PrePersist
+    public void prePersist() {
+        sentAt = LocalDateTime.now();
     }
 
-    @Column(name = "sent_at")
-    @Override
+    public Message() {}
+
+    public Message(String senderId, String content) {
+        this.senderId = senderId;
+        this.content = content;
+        this.sentAt = LocalDateTime.now();
+    }
+
+    public Long getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(Long messageId) {
+        this.messageId = messageId;
+    }
+
+    public String getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public LocalDateTime getSentAt() {
-        return super.getSentAt();
+        return sentAt;
+    }
+
+    public void setSentAt(LocalDateTime sentAt) {
+        this.sentAt = sentAt;
     }
 
     public ChatRoom getChatRoom(){
@@ -58,4 +78,14 @@ public class Message extends MessagePojo {
         this.chatRoom = chatRoom;
     }
 
+    @Override
+    public String toString() {
+        return "Message{" +
+                "messageId=" + messageId +
+                ", senderId='" + senderId + '\'' +
+                ", content='" + content + '\'' +
+                ", sentAt=" + sentAt +
+                ", chatRoom=" + chatRoom +
+                '}';
+    }
 }

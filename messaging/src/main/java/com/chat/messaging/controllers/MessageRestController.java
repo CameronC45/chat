@@ -2,7 +2,6 @@ package com.chat.messaging.controllers;
 
 import com.chat.messaging.models.ChatRoom;
 import com.chat.messaging.models.Message;
-import com.chat.messaging.pojo.MessagePojo;
 import com.chat.messaging.repository.ChatRoomRepository;
 import com.chat.messaging.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class MessageRestController {
     }
 
     @PostMapping("/{id}")
-    public Message createMessage(@PathVariable("id") String id, @RequestBody MessagePojo messagePojo){
+    public Message createMessage(@PathVariable("id") Long id, @RequestBody Message message){
 
         Optional<ChatRoom> chatRoom = chatRoomRepository.findById(id);
 
@@ -34,8 +33,7 @@ public class MessageRestController {
             throw new IllegalArgumentException("ChatRoom with roomId " + id + " does not exist.");
         }
 
-        Message message = new Message(messagePojo, chatRoom.get());
-
+        message.setChatRoom(chatRoom.get());
         return messageRepository.save(message);
     }
 }

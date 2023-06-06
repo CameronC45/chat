@@ -1,44 +1,61 @@
 package com.chat.messaging.models;
 
-import com.chat.messaging.pojo.ParticipantPojo;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
-//@Entity
-//@Table(name = "participants")
-public class Participant extends ParticipantPojo {
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id", referencedColumnName = "room_id", nullable = false)
-    private ChatRoom chatRoom;
-
-    public Participant(String userId, ChatRoom chatRoom) {
-        super(userId);
-        this.chatRoom = chatRoom;
-    }
-
-    public Participant(ParticipantPojo participantPojo, ChatRoom chatRoom){
-        this(participantPojo.getUserId(), chatRoom);
-    }
+@Entity
+@Table(name = "participants")
+public class Participant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Override
-    public String getParticipantId() {
-        return super.getParticipantId();
-    }
-
+    private Long participantId;
     @Column(name = "user_id", nullable = false, length = 50)
-    @Override
-    public String getUserId() {
-        return super.getUserId();
+    private String userId;
+    @Column(name = "joined_at")
+    private LocalDateTime joinedAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id")
+    @JsonBackReference
+    private ChatRoom chatRoom;
+
+    @PrePersist
+    public void prePersist() {
+        joinedAt = LocalDateTime.now();
     }
 
-    @Column(name = "joined_at")
-    @Override
+    public Participant() {}
+
+    public Participant(String userId) {
+        this.userId = userId;
+        this.joinedAt = LocalDateTime.now();
+    }
+
+    public Long getParticipantId() {
+        return participantId;
+    }
+
+    public void setParticipantId(Long participantId) {
+        this.participantId = participantId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     public LocalDateTime getJoinedAt() {
-        return super.getJoinedAt();
+        return joinedAt;
+    }
+
+    public void setJoinedAt(LocalDateTime joinedAt) {
+        this.joinedAt = joinedAt;
     }
 
     public ChatRoom getChatRoom(){
@@ -47,5 +64,15 @@ public class Participant extends ParticipantPojo {
 
     public void setChatRoom(ChatRoom chatRoom){
         this.chatRoom = chatRoom;
+    }
+
+    @Override
+    public String toString() {
+        return "Participant{" +
+                "participantId=" + participantId +
+                ", userId='" + userId + '\'' +
+                ", joinedAt=" + joinedAt +
+                ", chatRoom=" + chatRoom +
+                '}';
     }
 }
