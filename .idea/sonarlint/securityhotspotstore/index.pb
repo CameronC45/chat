@@ -95,3 +95,7 @@ e
 	user/mvnw,b\b\bbb9992081c92cd5914905e449726b4991f80adf
 =
 user/mvnw.cmd,3\5\35d7cf07e3a5f4eb0be6ffc913b42f59c5ef9107
+€
+Pmessaging/src/main/java/com/chat/messaging/repository/ParticipantRepository.java,c\c\cc0de19794a894f30095c75c531779383c124f70
+|
+Lmessaging/src/main/java/com/chat/messaging/repository/MessageRepository.java,6\6\663dca2d2e2017cd8e562a854ca49f1f792ee617
