@@ -19,6 +19,7 @@ public class MessagePublisher {
 
     public void sendMessage(Message message) throws JsonProcessingException {
         String jsonMessage = objectMapper.writeValueAsString(message);
+        System.out.println("Sending: " + jsonMessage);
         amqpTemplate.convertAndSend("messageExchange", "messageRoutingKey", jsonMessage);
     }
 }

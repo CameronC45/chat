@@ -11,8 +11,6 @@ Cuser/src/main/java/com/chat/user/security/MyUserDetailsService.java,e\6\e67b20
 Nuser/src/main/java/com/chat/user/controllers/AuthenticationRestController.java,0\c\0ce4d5827b8ebb7fe644c0b25e30aa596722e2c5
 t
 Duser/src/main/java/com/chat/user/controllers/UserRestController.java,6\2\62e03870fb0d5504f60c5f85fb0854ad271be652
-a
-1user/src/main/java/com/chat/user/models/User.java,b\4\b4c8afd0ad721264cf5b44ead5b3aac6739bf170
 c
 3user/src/main/java/com/chat/user/pojo/UserPojo.java,2\e\2ece207baf6d574bc9455ee4917150ca59fc9b89
 o
@@ -69,8 +67,6 @@ G
 notification/.gitignore,a\9\a90705b3cfa2b5b32d1c3f6988bdbd1a414e949a
 Z
 *user/.mvn/wrapper/maven-wrapper.properties,e\d\ede949ef628252fa86c2ea0738d4040e78b86e49
-D
-notification/pom.xml,0\d\0d8056be62f90a93d2bc0b4ea5db519b06028b1e
 A
 notification/mvnw,8\0\8015df3b6764506351d521575e2fa74171a629b3
 E
@@ -79,8 +75,6 @@ E
 Mnotification/src/main/java/com/chat/notification/NotificationApplication.java,a\c\ace7c7c530eb1305b0c0e2221490c01194aefe69
 ‚
 Rnotification/src/test/java/com/chat/notification/NotificationApplicationTests.java,9\0\90cc753a0ef562944ecf2646db0c97197417d195
-f
-6notification/src/main/resources/application.properties,6\6\669b629a9340d0ed02f141f4899470d9d2cc2f68
 ^
 .user/src/main/resources/application.properties,d\3\d3c5b741b79fe9f70dc3a012c3f22f5ced455be4
 j
@@ -99,3 +93,7 @@ e
 Pmessaging/src/main/java/com/chat/messaging/repository/ParticipantRepository.java,c\c\cc0de19794a894f30095c75c531779383c124f70
 |
 Lmessaging/src/main/java/com/chat/messaging/repository/MessageRepository.java,6\6\663dca2d2e2017cd8e562a854ca49f1f792ee617
+…
+Umessaging/src/main/java/com/chat/messaging/controllers/ParticipantRestController.java,4\9\4979357f7f8a14a9785d7c2c62f0228a15540a5e
+w
+Gmessaging/src/main/java/com/chat/messaging/security/SecurityConfig.java,1\0\10b626702062a2d514df98262c78b51567123fe3

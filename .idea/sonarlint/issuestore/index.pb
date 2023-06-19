@@ -11,8 +11,6 @@ Cuser/src/main/java/com/chat/user/security/MyUserDetailsService.java,e\6\e67b20
 Nuser/src/main/java/com/chat/user/controllers/AuthenticationRestController.java,0\c\0ce4d5827b8ebb7fe644c0b25e30aa596722e2c5
 t
 Duser/src/main/java/com/chat/user/controllers/UserRestController.java,6\2\62e03870fb0d5504f60c5f85fb0854ad271be652
-a
-1user/src/main/java/com/chat/user/models/User.java,b\4\b4c8afd0ad721264cf5b44ead5b3aac6739bf170
 c
 3user/src/main/java/com/chat/user/pojo/UserPojo.java,2\e\2ece207baf6d574bc9455ee4917150ca59fc9b89
 o
@@ -73,16 +71,12 @@ e
 5user/src/main/java/com/chat/user/UserApplication.java,2\b\2b2bb067a0b09c5c60fd950ee46ef807d54d6951
 b
 2notification/.mvn/wrapper/maven-wrapper.properties,b\d\bd1cccc4e6fd5f7d257b74009c40ae8cb6cd6fe9
-f
-6notification/src/main/resources/application.properties,6\6\669b629a9340d0ed02f141f4899470d9d2cc2f68
 G
 notification/.gitignore,a\9\a90705b3cfa2b5b32d1c3f6988bdbd1a414e949a
 A
 notification/mvnw,8\0\8015df3b6764506351d521575e2fa74171a629b3
 E
 notification/mvnw.cmd,d\9\d97540d493fb73a9909e30c848aeb8259daf9014
-D
-notification/pom.xml,0\d\0d8056be62f90a93d2bc0b4ea5db519b06028b1e
 Z
 *user/.mvn/wrapper/maven-wrapper.properties,e\d\ede949ef628252fa86c2ea0738d4040e78b86e49
 ^
@@ -99,3 +93,7 @@ Z
 Pmessaging/src/main/java/com/chat/messaging/repository/ParticipantRepository.java,c\c\cc0de19794a894f30095c75c531779383c124f70
 |
 Lmessaging/src/main/java/com/chat/messaging/repository/MessageRepository.java,6\6\663dca2d2e2017cd8e562a854ca49f1f792ee617
+…
+Umessaging/src/main/java/com/chat/messaging/controllers/ParticipantRestController.java,4\9\4979357f7f8a14a9785d7c2c62f0228a15540a5e
+w
+Gmessaging/src/main/java/com/chat/messaging/security/SecurityConfig.java,1\0\10b626702062a2d514df98262c78b51567123fe3
