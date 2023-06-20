@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationRestController {
@@ -53,4 +55,19 @@ public class AuthenticationRestController {
         return ResponseEntity.ok(jwtToken);
     }
 
+    @PostMapping("/validateToken")
+    public ResponseEntity<Boolean> validateToken(@RequestBody Map<String, String> tokenPayload) {
+        // Extract the token from the request body
+        String token = tokenPayload.get("token");
+
+        if (token == null) {
+            return ResponseEntity.badRequest().build();  // Return 400 Bad Request if there is no token
+        }
+
+        // Validate the token
+        boolean valid = jwt.validateToken(token);
+
+        // Return the result
+        return ResponseEntity.ok(valid);
+    }
 }

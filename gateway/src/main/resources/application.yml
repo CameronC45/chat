@@ -1,0 +1,24 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: messaging_route
+          uri: http://localhost:6200
+          predicates:
+            - Path=/messaging/**
+            - Path=/chat/**
+            - Path=/participant/**
+        - id: notification_route
+          uri: http://localhost:6300
+          predicates:
+            - Path=/notification/**
+        - id: user_route
+          uri: http://localhost:6100
+          predicates:
+            - Path=/users/**
+            - Path=/auth/**
+
+logging:
+  level:
+    root: INFO
+    com.chat.gateway.authentication: DEBUG
