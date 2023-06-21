@@ -5,9 +5,7 @@ spring:
         - id: messaging_route
           uri: http://localhost:6200
           predicates:
-            - Path=/messaging/**
-            - Path=/chat/**
-            - Path=/participant/**
+            - Path=/messaging/**,/chat/**,/participant/**
         - id: notification_route
           uri: http://localhost:6300
           predicates:
@@ -15,10 +13,10 @@ spring:
         - id: user_route
           uri: http://localhost:6100
           predicates:
-            - Path=/users/**
-            - Path=/auth/**
+            - Path=/users/**,/auth/**
 
 logging:
   level:
     root: INFO
     com.chat.gateway.authentication: DEBUG
+
