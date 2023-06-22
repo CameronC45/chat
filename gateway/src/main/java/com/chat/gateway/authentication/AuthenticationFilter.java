@@ -82,7 +82,7 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
                 token = token.substring(7);
             }
             // Prepare the request
-            WebClient webClient = webClientBuilder.baseUrl("http://localhost:6100").build(); // Replace with the actual URL of User Service
+            WebClient webClient = webClientBuilder.baseUrl("http://user-service:6100").build(); // Replace with the actual URL of User Service
             return webClient.post()
                     .uri("/auth/validateToken")
                     .bodyValue(Collections.singletonMap("token", token)) // Replace with the actual structure of the request body

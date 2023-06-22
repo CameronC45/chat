@@ -3,15 +3,15 @@ spring:
     gateway:
       routes:
         - id: messaging_route
-          uri: http://localhost:6200
+          uri: http://messaging-service:6200
           predicates:
             - Path=/messaging/**,/chat/**,/participant/**
         - id: notification_route
-          uri: http://localhost:6300
+          uri: http://notification-service:6300
           predicates:
             - Path=/notification/**
         - id: user_route
-          uri: http://localhost:6100
+          uri: http://user-service:6100
           predicates:
             - Path=/users/**,/auth/**
 

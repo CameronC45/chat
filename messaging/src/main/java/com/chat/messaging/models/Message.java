@@ -34,8 +34,9 @@ public class Message {
 
     public Message() {}
 
-    public Message(String senderId, String content) {
+    public Message(String senderId, String recipientUsername, String content) {
         this.senderId = senderId;
+        this.recipientUsername = recipientUsername;
         this.content = content;
         this.sentAt = LocalDateTime.now();
     }

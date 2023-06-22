@@ -1,21 +1,85 @@
 version: "3.1"
 services:
+  cloud-gateway:
+    container_name: cloud-gateway
+    image: cloud-gateway
+    build: "./gateway"
+    depends_on:
+      - user-service
+      - messaging-service
+      - notification-service
+    ports:
+      - "6000:6000"
+    networks:
+      - messaging-network
+  user-service:
+    container_name: user-service
+    image: user-service
+    build: "./user"
+    depends_on:
+      - user-service-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://user-service-db:5432/user-service-db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "6100:6100"
+    networks:
+      - messaging-network
   messaging-service:
     container_name: messaging-service
     image: messaging-service
     build: "./messaging"
     depends_on:
       - messaging-service-db
+      - rabbitmq
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://messaging-service-db:5432/messaging-service-db
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=password
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     ports:
-      - "8080:8080"
+      - "6200:6200"
+    networks:
+      - messaging-network
+  notification-service:
+    container_name: notification-service
+    image: notification-service
+    build: "./notification"
+    depends_on:
+      - notification-service-db
+      - rabbitmq
+      - messaging-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://notification-service-db:5432/notification-service-db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "6300:6300"
+    networks:
+      - messaging-network
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
     networks:
       - messaging-network
 
+  user-service-db:
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=user-service-db
+    image: postgres:latest
+    container_name: user-service-db
+    ports:
+      - "6101:5432"
+    networks:
+      - messaging-network
   messaging-service-db:
     environment:
       - POSTGRES_PASSWORD=password
@@ -24,7 +88,18 @@ services:
     image: postgres:latest
     container_name: messaging-service-db
     ports:
-      - "7200:5432"
+      - "6201:5432"
+    networks:
+      - messaging-network
+  notification-service-db:
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=notification-service-db
+    image: postgres:latest
+    container_name: notification-service-db
+    ports:
+      - "6301:5432"
     networks:
       - messaging-network
 

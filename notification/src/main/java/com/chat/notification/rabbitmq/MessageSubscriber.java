@@ -15,7 +15,6 @@ public class MessageSubscriber {
     private NotificationRepository repository;
 
     public void receiveMessage(String message) throws JsonProcessingException {
-        //String strMessage = new String(message, StandardCharsets.UTF_8);
         System.out.println("Received raw: " + message);
         ObjectMapper objectMapper = new ObjectMapper();
         Notification receivedNotification = objectMapper.readValue(message, Notification.class);

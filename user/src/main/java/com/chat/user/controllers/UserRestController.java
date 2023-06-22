@@ -22,10 +22,15 @@ public class UserRestController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping
-    public User createUser(@RequestBody User user){
+    public ResponseEntity<?> createUser(@RequestBody User user){
+
+        if(repository.existsByEmail(user.getEmail()) || repository.existsByUsername(user.getUsername())) {
+            return new ResponseEntity<>("A user with the given email or username already exists.", HttpStatus.CONFLICT);
+        }
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-        return repository.save(user);
+        User savedUser = repository.save(user);
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
     @GetMapping("/{email}")
