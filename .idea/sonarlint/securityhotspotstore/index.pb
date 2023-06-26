@@ -107,3 +107,17 @@ D
 notification/pom.xml,0\d\0d8056be62f90a93d2bc0b4ea5db519b06028b1e
 ?
 gateway/pom.xml,4\b\4b316bc60d1cfae51045f6fc8e58a8ae31f03ff3
+o
+?user/src/main/java/com/chat/user/repository/UserRepository.java,8\d\8dc249292601b741299a5af9ba6dfa7aa99491de
+
+Ogateway/src/main/java/com/chat/gateway/authentication/AuthenticationFilter.java,e\0\e0cff93f2269c3ab5723010269cf0e7bd98dbe4d
+B
+gateway/Dockerfile,5\a\5a39717901490093530d8f039ae4bb7d57680f50
+t
+Duser/src/main/java/com/chat/user/controllers/UserRestController.java,6\2\62e03870fb0d5504f60c5f85fb0854ad271be652
+u
+Emessaging/src/main/java/com/chat/messaging/rabbitmq/RabbitConfig.java,e\2\e2f7c733a8018cdf819338505135c3f844963c25
+A
+messaging/pom.xml,3\6\36c46830e58f26a5644214f9e8c4d594070ec7ad
+y
+Imessaging/src/main/java/com/chat/messaging/rabbitmq/MessagePublisher.java,7\c\7c735bf73ac19769a8ea842b3f91ec4e1fba33a9

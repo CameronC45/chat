@@ -9,7 +9,7 @@ services:
       - messaging-service
       - notification-service
     ports:
-      - "6000:6000"
+      - "8080:6000"
     networks:
       - messaging-network
   user-service:
