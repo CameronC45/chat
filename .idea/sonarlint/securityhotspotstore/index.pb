@@ -1,8 +1,6 @@
 
 s
 Cuser/src/main/java/com/chat/user/security/MyUserDetailsService.java,e\6\e67b20008b079174e963393570864d396151c01d
-t
-Dmessaging/src/main/java/com/chat/messaging/MessagingApplication.java,d\d\dd757bc7044bb1682ff6dddadd13c51ecc2eff8b
 w
 G.idea/sonarlint/issuestore/e/6/e67b20008b079174e963393570864d396151c01d,3\5\35c898c2bf91be75b84171073ebd10462daf102a
 ]
@@ -53,8 +51,6 @@ e
 Pmessaging/src/main/java/com/chat/messaging/repository/ParticipantRepository.java,c\c\cc0de19794a894f30095c75c531779383c124f70
 |
 Lmessaging/src/main/java/com/chat/messaging/repository/MessageRepository.java,6\6\663dca2d2e2017cd8e562a854ca49f1f792ee617
-w
-Gmessaging/src/main/java/com/chat/messaging/security/SecurityConfig.java,1\0\10b626702062a2d514df98262c78b51567123fe3
 y
 Imessaging/src/test/java/com/chat/messaging/MessagingApplicationTests.java,5\5\55181e861f3d865cd850c0745af45afe2d855162
 f
@@ -79,8 +75,6 @@ a
 1gateway/src/main/resources/application.properties,7\2\723d904adf42b8d4a8340e269af7dbe382232488
 s
 Cgateway/src/main/java/com/chat/gateway/security/SecurityConfig.java,9\0\901a5af4b2983193d27716c0b98292d9892c7067
-v
-Fgateway/src/main/java/com/chat/gateway/models/TokenAuthentication.java,5\9\59c8fb71024adea0fb62b316770e066b1b67ee56
 ^
 .user/src/main/resources/application.properties,d\3\d3c5b741b79fe9f70dc3a012c3f22f5ced455be4
 n
@@ -89,14 +83,8 @@ s
 Cgateway/src/test/java/com/chat/gateway/GatewayApplicationTests.java,2\2\22bb7582e0a0b488155748c94dd7625b2ebaeb4e
 a
 1user/src/main/java/com/chat/user/models/User.java,b\4\b4c8afd0ad721264cf5b44ead5b3aac6739bf170
-…
-Umessaging/src/main/java/com/chat/messaging/controllers/ParticipantRestController.java,4\9\4979357f7f8a14a9785d7c2c62f0228a15540a5e
-}
-Mmessaging/src/main/java/com/chat/messaging/repository/ChatRoomRepository.java,b\b\bb5899bc6d686d28227e8cf408da5dffc9c7bfed
 Œ
 \notification/src/main/java/com/chat/notification/controllers/NotificationRestController.java,9\8\989b0b208c4f0ea85d43d017585b26ace665c2ca
-~
-Nuser/src/main/java/com/chat/user/controllers/AuthenticationRestController.java,0\c\0ce4d5827b8ebb7fe644c0b25e30aa596722e2c5
 D
 messaging/Dockerfile,8\e\8eb126b1b37fa845e57d3ed650576bca02860fd8
 ?
@@ -109,8 +97,6 @@ D
 gateway/pom.xml,4\b\4b316bc60d1cfae51045f6fc8e58a8ae31f03ff3
 o
 ?user/src/main/java/com/chat/user/repository/UserRepository.java,8\d\8dc249292601b741299a5af9ba6dfa7aa99491de
-
-Ogateway/src/main/java/com/chat/gateway/authentication/AuthenticationFilter.java,e\0\e0cff93f2269c3ab5723010269cf0e7bd98dbe4d
 B
 gateway/Dockerfile,5\a\5a39717901490093530d8f039ae4bb7d57680f50
 t
@@ -121,3 +107,29 @@ A
 messaging/pom.xml,3\6\36c46830e58f26a5644214f9e8c4d594070ec7ad
 y
 Imessaging/src/main/java/com/chat/messaging/rabbitmq/MessagePublisher.java,7\c\7c735bf73ac19769a8ea842b3f91ec4e1fba33a9
+€
+Pnotification/src/main/java/com/chat/notification/rabbitmq/MessageSubscriber.java,e\e\ee18513397d5e575821ddf0bcb033bdfe95c1945
+X
+(chat-client/src/login-page/LoginPage.css,c\f\cfed0e1b923c6829e95b02c6e3e6709a68aeb887
+P
+ chat-client/src/assets/react.svg,1\c\1cb1188e2414256519e5cdebdafd23ec758e0824
+H
+chat-client/src/main.jsx,7\f\7f4551ad6b513f6f1ef9e1d45057e306bcd92496
+I
+chat-client/.eslintrc.cjs,f\a\fa82a4237443038696001280885689177c5924b6
+I
+chat-client/src/index.css,8\c\8c8b83fd4753a13469eec5923ad87f1169e7027a
+K
+chat-client/public/vite.svg,2\2\22fb1c7e82f9e8913edb35430588931032eaac31
+G
+chat-client/src/App.css,6\5\6585d8f9b08b376660f90094456f5a5c97e65deb
+K
+notification/wait-for-it.sh,5\7\57b26f4504c9420cd865d9bd5c0dceffcf29ab8f
+J
+chat-client/vite.config.js,1\0\108b03a57b42db65b502d77479c99587e202ca3c
+Z
+*gateway/src/main/resources/application.yml,6\9\69f854aca2550dae5ffb5cdb1c4ca8f8460a93d3
+F
+chat-client/index.html,a\f\af0e6ea0e80dd9fe6b75b8e59bf460712a50f71e
+F
+chat-client/.gitignore,0\c\0cd092c50a1e81cb550d61e1b5411c7cc70ee125

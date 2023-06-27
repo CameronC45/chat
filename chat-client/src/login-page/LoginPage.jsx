@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './LoginPage.css';
-import { isEmailValid } from './utils';
+import { isEmailValid } from '../utils/Utils';
 
 
 const LoginForm = ({ changeForm }) => {
@@ -27,7 +27,8 @@ const LoginForm = ({ changeForm }) => {
     
         const jwtToken = await response.text(); // Get the JSON data from the response
         console.log(jwtToken);
-        document.cookie = `token=${jwtToken}; HttpOnly; Secure; SameSite=Strict`;
+        document.cookie = `token=${jwtToken}; Secure; SameSite=Strict`;
+        location.reload();
 
       
   };

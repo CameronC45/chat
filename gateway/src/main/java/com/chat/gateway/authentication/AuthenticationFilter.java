@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.core.Authentication;
@@ -31,17 +30,16 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String path = exchange.getRequest().getPath().value();
-        logger.debug("Request path: " + path);
+        logger.debug(path, "Request path: {}");
 
         List<String> publicPaths = List.of("/users", "/auth/login");
 
         if (publicPaths.stream().anyMatch(path::startsWith)) {
             return chain.filter(exchange);
         }
-
         // Get the Authorization header
-        String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-        logger.debug("Authorization Header: " + authHeader);
+        String authHeader = exchange.getRequest().getCookies().getFirst("token").getValue();
+        logger.debug(authHeader, "Authorization Header: {}");
 
         // Validate the token with User Service
         // This assumes UserService has an endpoint /validateToken that verifies the token
@@ -72,22 +70,18 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return -100;  // The order is important, make sure this runs early
+        return -100;
     }
 
     private Mono<Boolean> validateTokenWithUserService(String token) {
         try {
-            // Remove "Bearer " from the start of the token, if it exists
-            if (token.startsWith("Bearer ")) {
-                token = token.substring(7);
-            }
             // Prepare the request
-            WebClient webClient = webClientBuilder.baseUrl("http://user-service:6100").build(); // Replace with the actual URL of User Service
+            WebClient webClient = webClientBuilder.baseUrl("http://user-service:6100").build();
             return webClient.post()
                     .uri("/auth/validateToken")
-                    .bodyValue(Collections.singletonMap("token", token)) // Replace with the actual structure of the request body
+                    .bodyValue(Collections.singletonMap("token", token))
                     .retrieve()
-                    .bodyToMono(Boolean.class);  // Replace with the actual structure of the response body
+                    .bodyToMono(Boolean.class);
         } catch (Exception e) {
             return Mono.error(new RuntimeException("Failed to validate the token", e));
         }

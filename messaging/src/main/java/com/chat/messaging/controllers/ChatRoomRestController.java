@@ -35,6 +35,12 @@ public class ChatRoomRestController {
         return chatRoom.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<ChatRoom>> getChatRoomsByParticipantId(@PathVariable String userId) {
+        List<ChatRoom> chatRooms = chatRoomRepository.findByUserId(userId);
+        return ResponseEntity.ok(chatRooms);
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteChatRoom(@PathVariable Long id){
