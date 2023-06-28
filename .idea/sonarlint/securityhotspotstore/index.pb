@@ -101,8 +101,6 @@ B
 gateway/Dockerfile,5\a\5a39717901490093530d8f039ae4bb7d57680f50
 t
 Duser/src/main/java/com/chat/user/controllers/UserRestController.java,6\2\62e03870fb0d5504f60c5f85fb0854ad271be652
-u
-Emessaging/src/main/java/com/chat/messaging/rabbitmq/RabbitConfig.java,e\2\e2f7c733a8018cdf819338505135c3f844963c25
 A
 messaging/pom.xml,3\6\36c46830e58f26a5644214f9e8c4d594070ec7ad
 y

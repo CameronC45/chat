@@ -37,12 +37,10 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
         if (publicPaths.stream().anyMatch(path::startsWith)) {
             return chain.filter(exchange);
         }
-        // Get the Authorization header
+
         String authHeader = exchange.getRequest().getCookies().getFirst("token").getValue();
         logger.debug(authHeader, "Authorization Header: {}");
 
-        // Validate the token with User Service
-        // This assumes UserService has an endpoint /validateToken that verifies the token
         return validateTokenWithUserService(authHeader)
                 .flatMap(valid -> {
                     if (valid) {

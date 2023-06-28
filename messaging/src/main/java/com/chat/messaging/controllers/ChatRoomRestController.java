@@ -1,6 +1,7 @@
 package com.chat.messaging.controllers;
 
 import com.chat.messaging.models.ChatRoom;
+import com.chat.messaging.models.UserIdentifier;
 import com.chat.messaging.repository.ChatRoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,9 +36,9 @@ public class ChatRoomRestController {
         return chatRoom.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<ChatRoom>> getChatRoomsByParticipantId(@PathVariable String userId) {
-        List<ChatRoom> chatRooms = chatRoomRepository.findByUserId(userId);
+    @PostMapping("/user")
+    public ResponseEntity<List<ChatRoom>> getChatRoomsByParticipantId(@RequestBody UserIdentifier user) {
+        List<ChatRoom> chatRooms = chatRoomRepository.findByUserId(user.getUserId());
         return ResponseEntity.ok(chatRooms);
     }
 
