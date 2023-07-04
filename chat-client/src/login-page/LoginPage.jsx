@@ -10,7 +10,7 @@ const LoginForm = ({ changeForm }) => {
   const handleSubmit = async event => {
     event.preventDefault();
     const response = await fetch('http://localhost:8080/auth/login', {
-          method: 'POST', // Specify the method
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -20,12 +20,12 @@ const LoginForm = ({ changeForm }) => {
           })
         });
     
-        if (!response.ok) { // Check if the request was successful
+        if (!response.ok) { 
           window.alert('Sign up failed. Please try again.');
           return;
         }
     
-        const jwtToken = await response.text(); // Get the JSON data from the response
+        const jwtToken = await response.text();
         console.log(jwtToken);
         document.cookie = `token=${jwtToken}; Secure; SameSite=Strict`;
         location.reload();
@@ -70,18 +70,18 @@ const SignUpForm = ({ changeForm }) => {
         }
     
         const response = await fetch('http://localhost:8080/users', {
-          method: 'POST', // Specify the method
+          method: 'POST', 
           headers: {
-            'Content-Type': 'application/json' // Specify the data type
+            'Content-Type': 'application/json' 
           },
-          body: JSON.stringify({ // Convert the JavaScript object to a JSON string
+          body: JSON.stringify({
             email: email,
             username: username,
             password: password
           })
         });
     
-        if (!response.ok) { // Check if the request was successful
+        if (!response.ok) { 
           window.alert('Sign up failed. Please try again.');
           return;
         }
