@@ -1,14 +1,14 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchMessages = createAsyncThunk(
-  'messages/fetchMessages',
+  "messages/fetchMessages",
   async (chatId, { getState }) => {
     try {
       const response = await fetch(`http://localhost:8080/chat/${chatId}`, {
-        method: 'GET',
-        credentials: 'include',
+        method: "GET",
+        credentials: "include",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
       const data = await response.json();
@@ -20,17 +20,24 @@ export const fetchMessages = createAsyncThunk(
 );
 
 export const sendMessage = createAsyncThunk(
-  'messages/sendMessage',
+  "messages/sendMessage",
   async ({ chatId, newMessage, username }, { dispatch }) => {
     try {
-      const response = await fetch(`http://localhost:8080/messaging/${chatId}`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ content: newMessage, recipientUsername: username ,senderId: username }),
-      });
+      const response = await fetch(
+        `http://localhost:8080/messaging/${chatId}`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            content: newMessage,
+            recipientUsername: username,
+            senderId: username,
+          }),
+        }
+      );
       const data = await response.json();
       if (data.success) {
         // dispatch fetchMessages again after a message is successfully sent
@@ -43,7 +50,7 @@ export const sendMessage = createAsyncThunk(
 );
 
 const messagesSlice = createSlice({
-  name: 'messages',
+  name: "messages",
   initialState: [],
   reducers: {},
   extraReducers: (builder) => {

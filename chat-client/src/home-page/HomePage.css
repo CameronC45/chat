@@ -47,7 +47,7 @@
   border: none;
   background-color: #e0e0e0;
   cursor: pointer;
-  color: #0099FF;
+  color: #0099ff;
   font-size: 1.5em;
 }
 
@@ -89,7 +89,7 @@
 }
 
 .send-icon {
-  color: #0099FF;
+  color: #0099ff;
   cursor: pointer;
   font-size: 24px;
 }
@@ -104,16 +104,108 @@
 
 .message.own {
   align-self: flex-end;
-  background-color: #0099FF;
+  background-color: #0099ff;
   color: white;
 }
 
 .message.other {
   align-self: flex-start;
-  background-color: #F1F0F0;
+  background-color: #f1f0f0;
   color: black;
 }
 
 .message-content {
   word-wrap: break-word;
+}
+
+.create-chatroom {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.create-chatroom h1,
+.create-chatroom h2 {
+  color: #333;
+}
+
+.create-chatroom input {
+  margin: 10px 0;
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.create-chatroom button {
+  margin-top: 10px;
+  border: none;
+  padding: 10px 20px;
+  background-color: #0099ff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.create-chatroom button:hover {
+  background-color: #0077cc;
+}
+
+.usernames-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  width: 80%;
+  overflow: auto;
+  height: calc(100% - 100px);
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.username-item {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+  transition: background-color 0.3s;
+}
+
+.username-item:last-child {
+  border-bottom: none;
+}
+
+.username-item:hover {
+  background-color: #f6f6f6;
+}
+
+.username-item.selected {
+  background-color: #0099ff;
+  color: white;
+}
+
+.participants-list {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 20%;
+  max-height: 20%;
+  background-color: #f6f6f6;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  overflow: auto;
+  text-align: center;
+}
+
+.add-participants-button {
+  width: 10%;
+  border: none;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  color: #0099ff;
+  font-size: 1em;
 }

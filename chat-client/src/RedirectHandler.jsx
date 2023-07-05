@@ -1,22 +1,22 @@
 // RedirectHandler.jsx
 
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getDecodedTokenFromCookie } from './utils/Utils';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getDecodedTokenFromCookie } from "./utils/Utils";
 
 function RedirectHandler() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        const decodedToken = getDecodedTokenFromCookie('token');
-        if (decodedToken && decodedToken.iss === 'chat-service') {
-            navigate('/home');
-        } else {
-            navigate('/login');
-        }
-    }, []); 
+  useEffect(() => {
+    const decodedToken = getDecodedTokenFromCookie("token");
+    if (decodedToken && decodedToken.iss === "chat-service") {
+      navigate("/home");
+    } else {
+      navigate("/login");
+    }
+  }, []);
 
-    return null;
+  return null;
 }
 
 export default RedirectHandler;

@@ -1,8 +1,11 @@
 package com.chat.messaging.controllers;
 
 import com.chat.messaging.models.ChatRoom;
+import com.chat.messaging.models.Participant;
 import com.chat.messaging.models.UserIdentifier;
 import com.chat.messaging.repository.ChatRoomRepository;
+import com.chat.messaging.repository.ParticipantRepository;
+import jakarta.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,9 @@ public class ChatRoomRestController {
     @Autowired
     private ChatRoomRepository chatRoomRepository;
 
+    @Autowired
+    private ParticipantRepository participantRepository;
+
     @GetMapping
     public ResponseEntity<List<ChatRoom>> getAllChatRooms() {
         List<ChatRoom> chatRooms = chatRoomRepository.findAll();
@@ -26,7 +32,12 @@ public class ChatRoomRestController {
 
     @PostMapping
     public ResponseEntity<ChatRoom> createChatRoom(@RequestBody ChatRoom chatRoom){
+        List<Participant> participants = chatRoom.getParticipants();
         ChatRoom savedChatRoom = chatRoomRepository.save(chatRoom);
+        for(Participant participant : participants) {
+            participant.setChatRoom(savedChatRoom);
+            participantRepository.save(participant);
+        }
         return new ResponseEntity<>(savedChatRoom, HttpStatus.CREATED);
     }
 
