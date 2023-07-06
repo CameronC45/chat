@@ -1,0 +1,44 @@
+
+.chatlist {
+  width: 20%;
+  height: 100%;
+  border-right: 1px solid #cccccc;
+  overflow: auto;
+  padding: 1em;
+  background-color: #f6f6f6;
+}
+
+.chatroom-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  color: #333;
+}
+
+.chatroom-item:hover {
+  background-color: #e0e0e0;
+}
+
+.chatroom-item.selected {
+  background-color: #eb647c;
+  color: #fff;
+  font-weight: bold;
+}
+
+.chatroom-item > svg {
+  margin-right: 10px;
+  color: #1a73e8;
+}
+
+.add-chatroom-button {
+  width: 100%;
+  border: none;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  color: #5454b3;
+  font-size: 1.5em;
+}

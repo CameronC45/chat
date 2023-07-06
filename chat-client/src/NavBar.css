@@ -10,6 +10,7 @@
 .navbar-icons {
   display: flex;
   gap: 1rem;
+  cursor: pointer;
 }
 
 .logo {
