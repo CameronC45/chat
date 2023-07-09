@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -15,8 +16,12 @@ public class Message {
     private Long messageId;
     @Column(name = "sender_id", nullable = false, length = 50)
     private String senderId;
-    @Column(name = "recipient_username", nullable = false, length = 50)
-    private String recipientUsername;
+    @CollectionTable(name = "recipient_usernames", joinColumns = @JoinColumn(name = "message_id"))
+    @Column(name = "recipient_username")
+    private List<String> recipientUsername;
+
+    @Column(name = "chat", nullable = false)
+    private String chat;
     @Column(name = "content", nullable = false, length = 1000)
     private String content;
     @Column(name = "sent_at")
@@ -34,9 +39,10 @@ public class Message {
 
     public Message() {}
 
-    public Message(String senderId, String recipientUsername, String content) {
+    public Message(String senderId, List<String> recipientUsername, String chat,String content) {
         this.senderId = senderId;
         this.recipientUsername = recipientUsername;
+        this.chat = chat;
         this.content = content;
         this.sentAt = LocalDateTime.now();
     }
@@ -57,12 +63,20 @@ public class Message {
         this.senderId = senderId;
     }
 
-    public String getRecipientUsername() {
+    public List<String> getRecipientUsername() {
         return recipientUsername;
     }
 
-    public void setRecipientUsername(String recipientUsername) {
+    public void setRecipientUsername(List<String> recipientUsername) {
         this.recipientUsername = recipientUsername;
+    }
+
+    public String getChat() {
+        return chat;
+    }
+
+    public void setChat(String chat) {
+        this.chat = chat;
     }
 
     public String getContent() {
@@ -94,9 +108,10 @@ public class Message {
         return "Message{" +
                 "messageId=" + messageId +
                 ", senderId='" + senderId + '\'' +
+                ", recipientUsername=" + recipientUsername +
                 ", content='" + content + '\'' +
                 ", sentAt=" + sentAt +
-                ", chatRoom=" + chatRoom +
+                ", chatRoomId=" + (chatRoom != null ? chatRoom.getRoomId() : null) +
                 '}';
     }
 }

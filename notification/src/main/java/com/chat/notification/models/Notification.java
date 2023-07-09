@@ -1,8 +1,11 @@
 package com.chat.notification.models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -14,8 +17,18 @@ public class Notification {
     private Long messageId;
     @Column(name = "sender_id", nullable = false, length = 50)
     private String senderId;
-    @Column(name = "recipient_username", nullable = false, length = 50)
-    private String recipientUsername;
+
+    @ManyToMany
+    @JoinTable(
+            name = "notification_recipient",
+            joinColumns = @JoinColumn(name = "notification_id"),
+            inverseJoinColumns = @JoinColumn(name = "recipient_username", referencedColumnName = "username")
+    )
+    private Set<Recipient> recipientUsernames;
+
+    @Column(name = "chat", nullable = false)
+    private String chat;
+
     @Column(name = "content", nullable = false, length = 1000)
     private String content;
     @Column(name = "sent_at")
@@ -24,8 +37,9 @@ public class Notification {
 
     public Notification() {}
 
-    public Notification(String senderId, String content, String sentAt) {
+    public Notification(String senderId, String chat, String content, String sentAt) {
         this.senderId = senderId;
+        this.chat = chat;
         this.content = content;
         this.sentAt = sentAt;
     }
@@ -46,12 +60,20 @@ public class Notification {
         this.senderId = senderId;
     }
 
-    public String getRecipientUsername() {
-        return recipientUsername;
+    public Set<Recipient> getRecipientUsernames() {
+        return recipientUsernames;
     }
 
-    public void setRecipientUsername(String recipientUsername) {
-        this.recipientUsername = recipientUsername;
+    public void setRecipientUsernames(Set<Recipient> recipientUsernames) {
+        this.recipientUsernames = recipientUsernames;
+    }
+
+    public String getChat() {
+        return chat;
+    }
+
+    public void setChat(String chat) {
+        this.chat = chat;
     }
 
     public String getContent() {

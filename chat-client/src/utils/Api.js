@@ -1,4 +1,5 @@
 export const getChatRooms = async (username) => {
+  console.log(username)
   try {
     const response = await fetch("http://localhost:8080/chat/user", {
       method: "POST",
@@ -91,7 +92,7 @@ export const getMessages = async (chatId) => {
   }
 };
 
-export const sendMessage = async (chatId, newMessage, username) => {
+export const sendMessage = async (chatId, newMessage, username, recipients) => {
   try {
     const response = await fetch(`http://localhost:8080/messaging/${chatId}`, {
       method: "POST",
@@ -101,7 +102,7 @@ export const sendMessage = async (chatId, newMessage, username) => {
       },
       body: JSON.stringify({
         content: newMessage,
-        recipientUsername: username,
+        recipientUsername: recipients,
         senderId: username,
       }),
     });

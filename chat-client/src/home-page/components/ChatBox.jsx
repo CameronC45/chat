@@ -7,9 +7,11 @@ import {
   getUsernames,
 } from "../../utils/Api";
 import { MdSend, MdAddCircleOutline } from "react-icons/md";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUsers, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import "./ChatBox.css";
 
-const Modal = ({ children, isOpen}) => {
+const Modal = ({ children, isOpen }) => {
   if (!isOpen) return null;
 
   return ReactDOM.createPortal(
@@ -44,7 +46,7 @@ const ParticipantsList = ({ participants, onAddParticipant }) => {
         className="add-participants-button"
         onClick={() => setIsModalOpen(true)}
       >
-        <MdAddCircleOutline />
+        <FontAwesomeIcon icon={faUserPlus} />
       </button>
       <Modal isOpen={isModalOpen} closeModal={() => setIsModalOpen(false)}>
         <div className="modal">
@@ -82,10 +84,15 @@ const ChatBox = ({ chatroom, username }) => {
   }, [chatroom]);
 
   const handleSendMessage = () => {
-    sendMessage(chatroom.roomId, newMessage, username).then((newMessage) => {
-      setMessages([...messages, newMessage]);
-      setNewMessage("");
-    });
+    const recipients = chatroom.participants
+      .filter(participant => participant.userId !== username)
+      .map(participant => participant.userId);
+  
+    sendMessage(chatroom.roomId, newMessage, username, recipients)
+      .then((newMessage) => {
+        setMessages([...messages, newMessage]);
+        setNewMessage("");
+      });
   };
 
   const handleAddParticipant = (newParticipantUsername) => {
@@ -115,7 +122,11 @@ const ChatBox = ({ chatroom, username }) => {
             {message.senderId !== username && (
               <div className="message-sender">{message.senderId}</div>
             )}
-            <div className={`message ${message.senderId === username ? "own" : "other"}`}>
+            <div
+              className={`message ${
+                message.senderId === username ? "own" : "other"
+              }`}
+            >
               <div className="message-content">{message.content}</div>
             </div>
           </div>
@@ -131,7 +142,9 @@ const ChatBox = ({ chatroom, username }) => {
           />
           <MdSend className="send-icon" onClick={handleSendMessage} />
         </div>
-        <button onClick={toggleParticipants}>Participants</button>
+        <button className="participants-button" onClick={toggleParticipants}>
+          <FontAwesomeIcon className="participants-icon" icon={faUsers} />
+        </button>
       </div>
       {showParticipants && (
         <ParticipantsList
@@ -145,5 +158,3 @@ const ChatBox = ({ chatroom, username }) => {
 };
 
 export default ChatBox;
-
-

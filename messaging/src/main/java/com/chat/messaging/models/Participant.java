@@ -72,7 +72,7 @@ public class Participant {
                 "participantId=" + participantId +
                 ", userId='" + userId + '\'' +
                 ", joinedAt=" + joinedAt +
-                ", chatRoom=" + chatRoom +
+                ", chatRoomId=" + (chatRoom != null ? chatRoom.getRoomId() : null) +
                 '}';
     }
 }

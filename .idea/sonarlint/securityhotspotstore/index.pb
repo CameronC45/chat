@@ -55,10 +55,6 @@ y
 Imessaging/src/test/java/com/chat/messaging/MessagingApplicationTests.java,5\5\55181e861f3d865cd850c0745af45afe2d855162
 f
 6notification/src/main/resources/application.properties,6\6\669b629a9340d0ed02f141f4899470d9d2cc2f68
-y
-Inotification/src/main/java/com/chat/notification/models/Notification.java,e\d\edfbac1f75d78150d3f8207c70604a97997494a6
-á
-Wnotification/src/main/java/com/chat/notification/repository/NotificationRepository.java,5\4\5418c181327aff3dbeb91e51271b08f0ee180a4a
 B
 gateway/.gitignore,a\d\ad2d9a57485c616eeb1387a613bcc79dcfefec59
 @
@@ -83,8 +79,6 @@ s
 Cgateway/src/test/java/com/chat/gateway/GatewayApplicationTests.java,2\2\22bb7582e0a0b488155748c94dd7625b2ebaeb4e
 a
 1user/src/main/java/com/chat/user/models/User.java,b\4\b4c8afd0ad721264cf5b44ead5b3aac6739bf170
-å
-\notification/src/main/java/com/chat/notification/controllers/NotificationRestController.java,9\8\989b0b208c4f0ea85d43d017585b26ace665c2ca
 D
 messaging/Dockerfile,8\e\8eb126b1b37fa845e57d3ed650576bca02860fd8
 ?
@@ -105,8 +99,6 @@ A
 messaging/pom.xml,3\6\36c46830e58f26a5644214f9e8c4d594070ec7ad
 y
 Imessaging/src/main/java/com/chat/messaging/rabbitmq/MessagePublisher.java,7\c\7c735bf73ac19769a8ea842b3f91ec4e1fba33a9
-Ä
-Pnotification/src/main/java/com/chat/notification/rabbitmq/MessageSubscriber.java,e\e\ee18513397d5e575821ddf0bcb033bdfe95c1945
 P
  chat-client/src/assets/react.svg,1\c\1cb1188e2414256519e5cdebdafd23ec758e0824
 K
@@ -127,8 +119,6 @@ Knotification/src/main/java/com/chat/notification/rabbitmq/RabbitConfig.java,e\
 Nuser/src/main/java/com/chat/user/controllers/AuthenticationRestController.java,0\c\0ce4d5827b8ebb7fe644c0b25e30aa596722e2c5
 t
 Dmessaging/src/main/java/com/chat/messaging/MessagingApplication.java,d\d\dd757bc7044bb1682ff6dddadd13c51ecc2eff8b
-n
->messaging/src/main/java/com/chat/messaging/models/Message.java,a\4\a4f1844817d83a03eaceaa5adddc3027ac1a8c2c
 
 Ogateway/src/main/java/com/chat/gateway/authentication/AuthenticationFilter.java,e\0\e0cff93f2269c3ab5723010269cf0e7bd98dbe4d
 w
@@ -165,8 +155,6 @@ Q.idea/sonarlint/securityhotspotstore/8/0/8015df3b6764506351d521575e2fa74171a629
 Q.idea/sonarlint/securityhotspotstore/5/a/5a39717901490093530d8f039ae4bb7d57680f50,7\3\735243c2bd625a171680e54e0e340798c86e01d3
 w
 G.idea/sonarlint/issuestore/5/4/5418c181327aff3dbeb91e51271b08f0ee180a4a,5\8\58fba277072a4c3991436517b18233eb171c7061
-w
-G.idea/sonarlint/issuestore/a/4/a4f1844817d83a03eaceaa5adddc3027ac1a8c2c,6\a\6adf7934f900a2f23f0debe873f787e64710aa2f
 Å
 Q.idea/sonarlint/securityhotspotstore/a/b/abca87735ade9ff55228116f3e221f2b56efa335,c\1\c1a0c0aab745b1fb1bcb99e5e36247a148925229
 w
@@ -304,8 +292,6 @@ Q.idea/sonarlint/securityhotspotstore/d/9/d97540d493fb73a9909e30c848aeb8259daf90
 Å
 Q.idea/sonarlint/securityhotspotstore/0/7/077eb82c53e55b6fde54ff234a55f75795da38b2,1\0\103dbba453dcccde549891bab668667fa8ab377d
 Å
-Q.idea/sonarlint/securityhotspotstore/a/4/a4f1844817d83a03eaceaa5adddc3027ac1a8c2c,3\a\3a2880d6e4b16a315467fdeab26aa6516aca1017
-Å
 Q.idea/sonarlint/securityhotspotstore/7/a/7a52ee30889c2e6da3e9e2331e73105d47822f32,a\5\a54c9d4fb2c37dcdd2913e9fc8d97fae41b6dd24
 w
 G.idea/sonarlint/issuestore/3/5/35d7cf07e3a5f4eb0be6ffc913b42f59c5ef9107,a\8\a8b20a2a746c36e9d5e76fa84003aefc01b264e9
@@ -436,8 +422,6 @@ Q.idea/sonarlint/securityhotspotstore/1/7/17fa61ef8d2c090bca81181601b2b31480dbbd
 w
 G.idea/sonarlint/issuestore/3/a/3a50efecd5e232df3e466eceec8ef9d5aca8eb84,1\1\119102d71972f21d3ff9c764f0bb7346cf20ddee
 w
-G.idea/sonarlint/issuestore/3/a/3a2880d6e4b16a315467fdeab26aa6516aca1017,e\7\e7c523c69c9bb07623977db12ecb700eeac65098
-w
 G.idea/sonarlint/issuestore/3/3/33498cd54ba413d2667230e7213592f276b26529,8\0\80bb9c626fae3efa1ab434961cb488e97a31c5b4
 w
 G.idea/sonarlint/issuestore/3/4/34583b48ea55ee67b3d22a593afdc79536a453b3,3\e\3e1ee57aa40d59d45db07f8f080c2c09853f90f9
@@ -513,8 +497,6 @@ w
 G.idea/sonarlint/issuestore/0/b/0b67017fff0ae7dac52a557ce14bcaa739e9b39a,e\e\ee760dbfc4eafb69079738226e524994b78d8d08
 w
 G.idea/sonarlint/issuestore/0/9/09e8cf75b3722810038be98b0c39607f704c2bc9,5\a\5a8b2bf0c165c48650b64d2ec00cd14460cf9265
-w
-G.idea/sonarlint/issuestore/6/a/6adf7934f900a2f23f0debe873f787e64710aa2f,9\3\93d96e56ca3b6b32898b4c5ab42d21179e4804dc
 w
 G.idea/sonarlint/issuestore/6/b/6ba24336b3bfc9878ae38ff157e311a43152419e,7\0\7099af9ce61dfb838d428a446d1bff29f8ceab0a
 w
@@ -665,12 +647,8 @@ w
 G.idea/sonarlint/issuestore/6/f/6f1253e3776674d6e7a77469ed91d8a8d3305a75,0\d\0d12fde44782555bd912ac9612bcc7b5efb4a28d
 w
 G.idea/sonarlint/issuestore/6/f/6fdcbe5c06441b9e753e5cd1813190a5eac43537,8\b\8bbd55f5ffeb4768a242318fde52360f4cb80786
-H
-chat-client/package.json,d\d\dd07b882c1bbc3511d3bfb9b58cdfbfc8fd54cbd
 w
 G.idea/sonarlint/issuestore/6/f/6f2142e2ef1c8e492113ab2717d6814975adf5bd,c\9\c9180b0b0092952f5025ce184889d8bf9e9322c8
-M
-chat-client/package-lock.json,1\c\1c6e995f3c03c8a39ec6d735fbdf7e32a4ac3605
 Å
 Q.idea/sonarlint/securityhotspotstore/5/e/5e28a4788768675a05ac4f7d2d2e75f5c9d7d3b1,b\0\b09c995fa190c1e28affe70e6b0603b9c5923427
 Å
@@ -750,11 +728,7 @@ G.idea/sonarlint/issuestore/4/2/4222c35938f6b7cdd4fe027336fabc63d66c36b6,7\4\74
 Å
 Q.idea/sonarlint/securityhotspotstore/3/a/3a50efecd5e232df3e466eceec8ef9d5aca8eb84,a\d\ad67254a105bc5eb6cbb6afc081149130956adb2
 Å
-Q.idea/sonarlint/securityhotspotstore/3/a/3a2880d6e4b16a315467fdeab26aa6516aca1017,d\3\d3d00afed3b3425a6e965de0f067465fcfaf6c90
-Å
 Q.idea/sonarlint/securityhotspotstore/3/3/33498cd54ba413d2667230e7213592f276b26529,e\1\e16a7b25a2d91eb8485ce826e2ee67580011b2cd
-Å
-Q.idea/sonarlint/securityhotspotstore/6/a/6adf7934f900a2f23f0debe873f787e64710aa2f,1\d\1da67dcbcca74f69fecb02deee7e1b71ccdc499f
 Å
 Q.idea/sonarlint/securityhotspotstore/3/4/34583b48ea55ee67b3d22a593afdc79536a453b3,c\2\c2831ac0524feda0ba6b83d34e97c2aad363f78c
 Å
@@ -861,11 +835,17 @@ w
 G.idea/sonarlint/issuestore/a/9/a921b1e986d0619fe3eabdc85acdad42c55ab802,e\4\e4c702b838472751f64e3dee544957029eda4847
 w
 G.idea/sonarlint/issuestore/4/9/493a62151ceee9bc867b846bd97e8a19af9e0c24,e\e\eebf8c665d0acbde8e53c480eac03b0e339e3250
-L
-chat-client/src/utils/Api.js,3\2\328bfc7594a359a4c1f243eb88d47375aa571a85
 N
 chat-client/src/utils/Utils.js,6\f\6f576a079f82284972c1ecdc5d5044a1f2964808
 X
 (chat-client/src/login-page/LoginPage.css,c\f\cfed0e1b923c6829e95b02c6e3e6709a68aeb887
 X
 (chat-client/src/login-page/LoginPage.jsx,5\1\51b444ed2a0eb274baa2a89248632d53248f7bac
+a
+1chat-client/src/home-page/components/ChatList.jsx,6\3\63d5ff3d4a2036a6660b98d3d87ee545d560fe14
+V
+&chat-client/src/home-page/HomePage.jsx,3\8\38576aeed7a2cdfe74a6629430c33265eb40ad10
+p
+@chat-client/src/home-page/components/CreateChatRoomComponent.css,9\0\90bd903e5ceef5fcc650056f4b5782e3095b17e3
+Ö
+Umessaging/src/main/java/com/chat/messaging/controllers/ParticipantRestController.java,4\9\4979357f7f8a14a9785d7c2c62f0228a15540a5e

@@ -25,7 +25,7 @@
 .input-send-container {
   display: flex;
   align-items: center;
-  width: 80%;
+  width: 90%;
   background-color: #f3f3f3;
   border-radius: 20px;
   padding: 5px;
@@ -37,6 +37,16 @@
   outline: none;
   padding: 0 10px;
   background-color: #f3f3f3;
+}
+
+.participants-button {
+  padding: 10px;
+  border: none;
+  background: none;
+}
+
+.participants-icon {
+  font-size: 24px;
 }
 
 .send-icon {
@@ -80,8 +90,6 @@
   color: black;
 }
 
-
-
 .participants-list {
   width: 100%;
   background-color: #ffffff;
@@ -95,27 +103,25 @@
   display: inline-block;
   background-color: #5454b3;
   color: #fff;
-  border: 2px solid #3f3f90;  
+  border: 2px solid #3f3f90;
   border-radius: 20px;
   padding: 5px 10px;
   margin: 5px;
   font-size: 1.2em;
   font-weight: 600;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);  
-  transition: transform 0.01s ease-in-out; 
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.01s ease-in-out;
 }
 
 .participant-name:hover {
-  transform: scale(1.05); 
+  transform: scale(1.05);
 }
 
 .add-participants-button {
   display: inline-block;
-  background-color: #f6f6f6;
+  background: none;
   border: none;
-  color: #0099ff;
-  font-size: 1em;
-  border-radius: 50%;
+  font-size: 24px;
   padding: 10px;
   cursor: pointer;
   margin: 5px;
