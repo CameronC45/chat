@@ -15,45 +15,47 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UserRestController {
 
-    @Autowired
-    private UserRepository repository;
+	@Autowired
+	private UserRepository repository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
-    @PostMapping
-    public ResponseEntity<?> createUser(@RequestBody User user){
+	@PostMapping
+	public ResponseEntity<?> createUser(@RequestBody User user) {
 
-        if(repository.existsByEmail(user.getEmail()) || repository.existsByUsername(user.getUsername())) {
-            return new ResponseEntity<>("A user with the given email or username already exists.", HttpStatus.CONFLICT);
-        }
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
-        User savedUser = repository.save(user);
-        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
-    }
+		if (repository.existsByEmail(user.getEmail()) || repository.existsByUsername(user.getUsername())) {
+			return new ResponseEntity<>("A user with the given email or username already exists.", HttpStatus.CONFLICT);
+		}
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
+		User savedUser = repository.save(user);
+		return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+	}
 
-    @GetMapping("/{email}")
-    public ResponseEntity<User> getUser(@PathVariable String email) {
-        Optional<User> user = repository.findById(email);
-        return user.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+	@GetMapping("/{email}")
+	public ResponseEntity<User> getUser(@PathVariable String email) {
+		Optional<User> user = repository.findById(email);
+		return user.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+				.orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
 
-    @GetMapping
-    public List<User> getAllUsers() {
-        return repository.findAll();
-    }
+	@GetMapping
+	public List<User> getAllUsers() {
+		return repository.findAll();
+	}
 
-    @DeleteMapping("/{email}")
-    public ResponseEntity<Void> deleteUser(@PathVariable String email) {
-        Optional<User> user = repository.findById(email);
+	@DeleteMapping("/{email}")
+	public ResponseEntity<Void> deleteUser(@PathVariable String email) {
+		Optional<User> user = repository.findById(email);
 
-        if (user.isPresent()) {
-            repository.deleteById(email);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+		if (user.isPresent()) {
+			repository.deleteById(email);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
 }

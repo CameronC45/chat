@@ -11,76 +11,74 @@ import java.util.List;
 @Table(name = "chat_room")
 public class ChatRoom {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "room_id")
-    private Long roomId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "room_id")
+	private Long roomId;
 
-    @Column(name = "name", length = 50)
-    private String name;
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
+	@Column(name = "name", length = 50)
+	private String name;
 
-    @OneToMany(mappedBy = "chatRoom", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Message> messages = new ArrayList<>();
+	@Column(name = "created_at")
+	private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "chatRoom", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Participant> participants = new ArrayList<>();
+	@OneToMany(mappedBy = "chatRoom", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonManagedReference
+	private List<Message> messages = new ArrayList<>();
 
-    @PrePersist
-    public void prePersist() {
-        createdAt = LocalDateTime.now();
-    }
+	@OneToMany(mappedBy = "chatRoom", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonManagedReference
+	private List<Participant> participants = new ArrayList<>();
 
-    public ChatRoom() {}
+	@PrePersist
+	public void prePersist() {
+		createdAt = LocalDateTime.now();
+	}
 
-    public ChatRoom(String name) {
-        this.name = name;
-        this.createdAt = LocalDateTime.now();
-    }
+	public ChatRoom() {
+	}
 
-    public Long getRoomId() {
-        return roomId;
-    }
+	public ChatRoom(String name) {
+		this.name = name;
+		this.createdAt = LocalDateTime.now();
+	}
 
-    public void setRoomId(Long roomId) {
-        this.roomId = roomId;
-    }
+	public Long getRoomId() {
+		return roomId;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setRoomId(Long roomId) {
+		this.roomId = roomId;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
 
-    public List<Message> getMessages() {
-        return messages;
-    }
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    public List<Participant> getParticipants() {
-        return participants;
-    }
+	public List<Message> getMessages() {
+		return messages;
+	}
 
-    @Override
-    public String toString() {
-        return "ChatRoom{" +
-                "roomId=" + roomId +
-                ", name='" + name + '\'' +
-                ", createdAt=" + createdAt +
-                ", messages=" + messages +
-                ", participants=" + participants +
-                '}';
-    }
+	public List<Participant> getParticipants() {
+		return participants;
+	}
+
+	@Override
+	public String toString() {
+		return "ChatRoom{" + "roomId=" + roomId + ", name='" + name + '\'' + ", createdAt=" + createdAt + ", messages="
+				+ messages + ", participants=" + participants + '}';
+	}
+
 }

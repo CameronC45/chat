@@ -17,58 +17,58 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfig {
 
-    @Bean
-    public Queue queue() {
-        return new Queue("messageQueue", false);
-    }
+	@Bean
+	public Queue queue() {
+		return new Queue("messageQueue", false);
+	}
 
-    @Bean
-    public DirectExchange exchange() {
-        return new DirectExchange("messageExchange");
-    }
+	@Bean
+	public DirectExchange exchange() {
+		return new DirectExchange("messageExchange");
+	}
 
-    @Bean
-    public Binding binding(Queue queue, DirectExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with("messageRoutingKey");
-    }
+	@Bean
+	public Binding binding(Queue queue, DirectExchange exchange) {
+		return BindingBuilder.bind(queue).to(exchange).with("messageRoutingKey");
+	}
 
-    @Bean
-    public ConnectionFactory connectionFactory() {
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
-        connectionFactory.setHost("rabbitmq");
-        connectionFactory.setPort(5672);
-        connectionFactory.setUsername("guest");
-        connectionFactory.setPassword("guest");
-        return connectionFactory;
-    }
+	@Bean
+	public ConnectionFactory connectionFactory() {
+		CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
+		connectionFactory.setHost("rabbitmq");
+		connectionFactory.setPort(5672);
+		connectionFactory.setUsername("guest");
+		connectionFactory.setPassword("guest");
+		return connectionFactory;
+	}
 
-    @Bean
-    public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
-        return new RabbitAdmin(connectionFactory);
-    }
+	@Bean
+	public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
+		return new RabbitAdmin(connectionFactory);
+	}
 
-    @Bean
-    public MessageConverter jsonMessageConverter() {
-        return new Jackson2JsonMessageConverter();
-    }
+	@Bean
+	public MessageConverter jsonMessageConverter() {
+		return new Jackson2JsonMessageConverter();
+	}
 
-    @Bean
-    public SimpleMessageListenerContainer container(ConnectionFactory connectionFactory, MessageListenerAdapter listenerAdapter) {
-        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-        container.setConnectionFactory(connectionFactory);
-        container.setQueueNames("messageQueue");
-        container.setMessageListener(listenerAdapter);
-        return container;
-    }
+	@Bean
+	public SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
+			MessageListenerAdapter listenerAdapter) {
+		SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
+		container.setConnectionFactory(connectionFactory);
+		container.setQueueNames("messageQueue");
+		container.setMessageListener(listenerAdapter);
+		return container;
+	}
 
-    @Bean
-    public MessageListenerAdapter listenerAdapter(MessageSubscriber receiver, MessageConverter converter) {
-        MessageListenerAdapter messageListenerAdapter = new MessageListenerAdapter(receiver);
-        messageListenerAdapter.setDelegate(receiver);
-        messageListenerAdapter.setDefaultListenerMethod("receiveMessage");
-        messageListenerAdapter.setMessageConverter(converter);
-        return messageListenerAdapter;
-    }
+	@Bean
+	public MessageListenerAdapter listenerAdapter(MessageSubscriber receiver, MessageConverter converter) {
+		MessageListenerAdapter messageListenerAdapter = new MessageListenerAdapter(receiver);
+		messageListenerAdapter.setDelegate(receiver);
+		messageListenerAdapter.setDefaultListenerMethod("receiveMessage");
+		messageListenerAdapter.setMessageConverter(converter);
+		return messageListenerAdapter;
+	}
 
 }
-

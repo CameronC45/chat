@@ -18,48 +18,48 @@ import java.util.Optional;
 @RequestMapping("/chat")
 public class ChatRoomRestController {
 
-    @Autowired
-    private ChatRoomRepository chatRoomRepository;
+	@Autowired
+	private ChatRoomRepository chatRoomRepository;
 
-    @Autowired
-    private ParticipantRepository participantRepository;
+	@Autowired
+	private ParticipantRepository participantRepository;
 
-    @GetMapping
-    public ResponseEntity<List<ChatRoom>> getAllChatRooms() {
-        List<ChatRoom> chatRooms = chatRoomRepository.findAll();
-        return ResponseEntity.ok(chatRooms);
-    }
+	@GetMapping
+	public ResponseEntity<List<ChatRoom>> getAllChatRooms() {
+		List<ChatRoom> chatRooms = chatRoomRepository.findAll();
+		return ResponseEntity.ok(chatRooms);
+	}
 
-    @PostMapping
-    public ResponseEntity<ChatRoom> createChatRoom(@RequestBody ChatRoom chatRoom){
-        List<Participant> participants = chatRoom.getParticipants();
-        ChatRoom savedChatRoom = chatRoomRepository.save(chatRoom);
-        for(Participant participant : participants) {
-            participant.setChatRoom(savedChatRoom);
-            participantRepository.save(participant);
-        }
-        return new ResponseEntity<>(savedChatRoom, HttpStatus.CREATED);
-    }
+	@PostMapping
+	public ResponseEntity<ChatRoom> createChatRoom(@RequestBody ChatRoom chatRoom) {
+		List<Participant> participants = chatRoom.getParticipants();
+		ChatRoom savedChatRoom = chatRoomRepository.save(chatRoom);
+		for (Participant participant : participants) {
+			participant.setChatRoom(savedChatRoom);
+			participantRepository.save(participant);
+		}
+		return new ResponseEntity<>(savedChatRoom, HttpStatus.CREATED);
+	}
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ChatRoom> getChatRoomById(@PathVariable Long id){
-        Optional<ChatRoom> chatRoom = chatRoomRepository.findById(id);
-        return chatRoom.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
+	@GetMapping("/{id}")
+	public ResponseEntity<ChatRoom> getChatRoomById(@PathVariable Long id) {
+		Optional<ChatRoom> chatRoom = chatRoomRepository.findById(id);
+		return chatRoom.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+	}
 
-    @PostMapping("/user")
-    public ResponseEntity<List<ChatRoom>> getChatRoomsByParticipantId(@RequestBody UserIdentifier user) {
-        List<ChatRoom> chatRooms = chatRoomRepository.findByUserId(user.getUserId());
-        return ResponseEntity.ok(chatRooms);
-    }
+	@PostMapping("/user")
+	public ResponseEntity<List<ChatRoom>> getChatRoomsByParticipantId(@RequestBody UserIdentifier user) {
+		List<ChatRoom> chatRooms = chatRoomRepository.findByUserId(user.getUserId());
+		return ResponseEntity.ok(chatRooms);
+	}
 
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteChatRoom(@PathVariable Long id) {
+		if (chatRoomRepository.existsById(id)) {
+			chatRoomRepository.deleteById(id);
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.notFound().build();
+	}
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteChatRoom(@PathVariable Long id){
-        if(chatRoomRepository.existsById(id)){
-            chatRoomRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
-    }
 }

@@ -13,22 +13,20 @@ import java.util.Optional;
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByUsername(username);
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Optional<User> user = userRepository.findByUsername(username);
 
-        if(user.isEmpty()){
-            throw new UsernameNotFoundException("User not found");
-        }
+		if (user.isEmpty()) {
+			throw new UsernameNotFoundException("User not found");
+		}
 
-        User retrievedUser = user.get();
-        return org.springframework.security.core.userdetails.User
-                .withUsername(retrievedUser.getUsername())
-                .password(retrievedUser.getPassword())
-                .roles("USER")
-                .build();
-    }
+		User retrievedUser = user.get();
+		return org.springframework.security.core.userdetails.User.withUsername(retrievedUser.getUsername())
+				.password(retrievedUser.getPassword()).roles("USER").build();
+	}
+
 }

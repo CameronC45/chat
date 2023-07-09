@@ -1,58 +1,65 @@
 package com.chat.notification.models;
+
 public class NotificationDTO {
 
-    private Long messageId;
-    private String senderId;
-    private String chat;
-    private String content;
-    private String sentAt;
-    private String[] recipientUsername;
+	private Long messageId;
 
-    public Long getMessageId() {
-        return messageId;
-    }
+	private String senderId;
 
-    public void setMessageId(Long messageId) {
-        this.messageId = messageId;
-    }
+	private String chat;
 
-    public String getSenderId() {
-        return senderId;
-    }
+	private String content;
 
-    public void setSenderId(String senderId) {
-        this.senderId = senderId;
-    }
+	private String sentAt;
 
-    public String getChat() {
-        return chat;
-    }
+	private String[] recipientUsername;
 
-    public void setChat(String chat) {
-        this.chat = chat;
-    }
+	public Long getMessageId() {
+		return messageId;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public void setMessageId(Long messageId) {
+		this.messageId = messageId;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public String getSenderId() {
+		return senderId;
+	}
 
-    public String getSentAt() {
-        return sentAt;
-    }
+	public void setSenderId(String senderId) {
+		this.senderId = senderId;
+	}
 
-    public void setSentAt(String sentAt) {
-        this.sentAt = sentAt;
-    }
+	public String getChat() {
+		return chat;
+	}
 
-    public String[] getRecipientUsername() {
-        return recipientUsername;
-    }
+	public void setChat(String chat) {
+		this.chat = chat;
+	}
 
-    public void setRecipientUsername(String[] recipientUsername) {
-        this.recipientUsername = recipientUsername;
-    }
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getSentAt() {
+		return sentAt;
+	}
+
+	public void setSentAt(String sentAt) {
+		this.sentAt = sentAt;
+	}
+
+	public String[] getRecipientUsername() {
+		return recipientUsername;
+	}
+
+	public void setRecipientUsername(String[] recipientUsername) {
+		this.recipientUsername = recipientUsername;
+	}
+
 }

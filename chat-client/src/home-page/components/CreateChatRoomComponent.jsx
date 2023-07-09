@@ -9,10 +9,10 @@ const CreateChatRoomComponent = ({ username, onChatroomCreate }) => {
 
   useEffect(() => {
     getUsernames().then((usernames) => {
-      const otherUsers = usernames.filter(user => user.username !== username);
+      const otherUsers = usernames.filter((user) => user.username !== username);
       setUsers(otherUsers);
     });
-}, []);
+  }, []);
 
   const handleChatroomCreate = () => {
     createChatRooms(chatroomName, [username, ...selectedUsernames]).then(() => {

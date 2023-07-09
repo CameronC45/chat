@@ -22,69 +22,64 @@ import java.util.List;
 @Component
 public class AuthenticationFilter implements GlobalFilter, Ordered {
 
-    private final Logger logger = LoggerFactory.getLogger(AuthenticationFilter.class);
+	private final Logger logger = LoggerFactory.getLogger(AuthenticationFilter.class);
 
-    @Autowired
-    private WebClient.Builder webClientBuilder;
+	@Autowired
+	private WebClient.Builder webClientBuilder;
 
-    @Override
-    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String path = exchange.getRequest().getPath().value();
-        logger.debug(path, "Request path: {}");
+	@Override
+	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+		String path = exchange.getRequest().getPath().value();
+		logger.debug(path, "Request path: {}");
 
-        List<String> publicPaths = List.of("/users", "/auth/login");
+		List<String> publicPaths = List.of("/users", "/auth/login");
 
-        if (publicPaths.stream().anyMatch(path::startsWith)) {
-            return chain.filter(exchange);
-        }
+		if (publicPaths.stream().anyMatch(path::startsWith)) {
+			return chain.filter(exchange);
+		}
 
-        String authHeader = exchange.getRequest().getCookies().getFirst("token").getValue();
-        logger.debug(authHeader, "Authorization Header: {}");
+		String authHeader = exchange.getRequest().getCookies().getFirst("token").getValue();
+		logger.debug(authHeader, "Authorization Header: {}");
 
-        return validateTokenWithUserService(authHeader)
-                .flatMap(valid -> {
-                    if (valid) {
-                        // If valid, set the authentication in Security Context
-                        Authentication authentication = new TokenAuthentication(authHeader);
-                        authentication.setAuthenticated(true);
-                        SecurityContextImpl securityContext = new SecurityContextImpl(authentication);
-                        return chain.filter(exchange.mutate().principal(Mono.just(securityContext.getAuthentication())).build());
-                    } else {
-                        // If not valid, return 401 Unauthorized
-                        ServerHttpResponse response = exchange.getResponse();
-                        response.setStatusCode(HttpStatus.UNAUTHORIZED);
-                        return response.setComplete();
-                    }
-                })
-                .onErrorResume(e -> {
-                    // Handle the error
-                    logger.error("Failed to validate the token", e);
-                    ServerHttpResponse response = exchange.getResponse();
-                    response.setStatusCode(HttpStatus.UNAUTHORIZED);
-                    return response.setComplete();
-                });
-    }
+		return validateTokenWithUserService(authHeader).flatMap(valid -> {
+			if (valid) {
+				// If valid, set the authentication in Security Context
+				Authentication authentication = new TokenAuthentication(authHeader);
+				authentication.setAuthenticated(true);
+				SecurityContextImpl securityContext = new SecurityContextImpl(authentication);
+				return chain
+						.filter(exchange.mutate().principal(Mono.just(securityContext.getAuthentication())).build());
+			}
+			else {
+				// If not valid, return 401 Unauthorized
+				ServerHttpResponse response = exchange.getResponse();
+				response.setStatusCode(HttpStatus.UNAUTHORIZED);
+				return response.setComplete();
+			}
+		}).onErrorResume(e -> {
+			// Handle the error
+			logger.error("Failed to validate the token", e);
+			ServerHttpResponse response = exchange.getResponse();
+			response.setStatusCode(HttpStatus.UNAUTHORIZED);
+			return response.setComplete();
+		});
+	}
 
+	@Override
+	public int getOrder() {
+		return -100;
+	}
 
-    @Override
-    public int getOrder() {
-        return -100;
-    }
-
-    private Mono<Boolean> validateTokenWithUserService(String token) {
-        try {
-            // Prepare the request
-            WebClient webClient = webClientBuilder.baseUrl("http://user-service:6100").build();
-            return webClient.post()
-                    .uri("/auth/validateToken")
-                    .bodyValue(Collections.singletonMap("token", token))
-                    .retrieve()
-                    .bodyToMono(Boolean.class);
-        } catch (Exception e) {
-            return Mono.error(new RuntimeException("Failed to validate the token", e));
-        }
-    }
+	private Mono<Boolean> validateTokenWithUserService(String token) {
+		try {
+			// Prepare the request
+			WebClient webClient = webClientBuilder.baseUrl("http://user-service:6100").build();
+			return webClient.post().uri("/auth/validateToken").bodyValue(Collections.singletonMap("token", token))
+					.retrieve().bodyToMono(Boolean.class);
+		}
+		catch (Exception e) {
+			return Mono.error(new RuntimeException("Failed to validate the token", e));
+		}
+	}
 
 }
-
-

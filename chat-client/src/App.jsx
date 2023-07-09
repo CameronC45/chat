@@ -7,18 +7,15 @@ import { MainLayout } from "./MainLayout";
 
 function App() {
   return (
-    <div className="app-container">
-      <Router>
-        <RedirectHandler />
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/home" element={<MainLayout />}>
-            <Route index element={<HomePage />} />
-            {/* Add more routes here where you want the NavBar to be present */}
-          </Route>
-        </Routes>
-      </Router>
-    </div>
+    <Router>
+      <RedirectHandler />
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/home" element={<MainLayout />}>
+          <Route index element={<HomePage />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 

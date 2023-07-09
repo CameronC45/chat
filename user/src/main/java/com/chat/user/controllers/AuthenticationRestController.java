@@ -21,53 +21,58 @@ import java.util.Map;
 @RequestMapping("/auth")
 public class AuthenticationRestController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+	@Autowired
+	private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    @Autowired
-    private MyUserDetailsService userDetailsService;
+	@Autowired
+	private MyUserDetailsService userDetailsService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private JwtUtil jwt;
+	@Autowired
+	private JwtUtil jwt;
 
-    @PostMapping("/login")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody User user) {
-        try {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
-            boolean passwordMatches = passwordEncoder.matches(user.getPassword(), userDetails.getPassword());
-            if (passwordMatches) {
-                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
-            } else {
-                return ResponseEntity.badRequest().body("Invalid username or password");
-            }
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e);
-        }
+	@PostMapping("/login")
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody User user) {
+		try {
+			UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+			boolean passwordMatches = passwordEncoder.matches(user.getPassword(), userDetails.getPassword());
+			if (passwordMatches) {
+				authenticationManager
+						.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+			}
+			else {
+				return ResponseEntity.badRequest().body("Invalid username or password");
+			}
+		}
+		catch (Exception e) {
+			return ResponseEntity.badRequest().body(e);
+		}
 
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
-        final String jwtToken = jwt.generateToken(userDetails);
-        return ResponseEntity.ok(jwtToken);
-    }
+		final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+		final String jwtToken = jwt.generateToken(userDetails);
+		return ResponseEntity.ok(jwtToken);
+	}
 
-    @PostMapping("/validateToken")
-    public ResponseEntity<Boolean> validateToken(@RequestBody Map<String, String> tokenPayload) {
-        // Extract the token from the request body
-        String token = tokenPayload.get("token");
+	@PostMapping("/validateToken")
+	public ResponseEntity<Boolean> validateToken(@RequestBody Map<String, String> tokenPayload) {
+		// Extract the token from the request body
+		String token = tokenPayload.get("token");
 
-        if (token == null) {
-            return ResponseEntity.badRequest().build();  // Return 400 Bad Request if there is no token
-        }
+		if (token == null) {
+			return ResponseEntity.badRequest().build(); // Return 400 Bad Request if there
+														// is no token
+		}
 
-        // Validate the token
-        boolean valid = jwt.validateToken(token);
+		// Validate the token
+		boolean valid = jwt.validateToken(token);
 
-        // Return the result
-        return ResponseEntity.ok(valid);
-    }
+		// Return the result
+		return ResponseEntity.ok(valid);
+	}
+
 }

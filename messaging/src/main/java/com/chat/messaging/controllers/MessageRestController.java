@@ -20,45 +20,47 @@ import java.util.Optional;
 @RequestMapping("/messaging")
 public class MessageRestController {
 
-    @Autowired
-    private MessageRepository messageRepository;
-    @Autowired
-    private ChatRoomRepository chatRoomRepository;
-    @Autowired
-    private MessagePublisher messagePublisher;
+	@Autowired
+	private MessageRepository messageRepository;
 
-    private static final Logger log = LoggerFactory.getLogger(MessageRestController.class);
+	@Autowired
+	private ChatRoomRepository chatRoomRepository;
 
+	@Autowired
+	private MessagePublisher messagePublisher;
 
+	private static final Logger log = LoggerFactory.getLogger(MessageRestController.class);
 
-    @GetMapping
-    public List<Message> getAllMessages(){
-        return messageRepository.findAll();
-    }
+	@GetMapping
+	public List<Message> getAllMessages() {
+		return messageRepository.findAll();
+	}
 
-    @PostMapping("/{id}")
-    public ResponseEntity<Message> createMessage(@PathVariable("id") Long id, @RequestBody Message message) {
+	@PostMapping("/{id}")
+	public ResponseEntity<Message> createMessage(@PathVariable("id") Long id, @RequestBody Message message) {
 
-        Optional<ChatRoom> chatRoom = chatRoomRepository.findById(id);
+		Optional<ChatRoom> chatRoom = chatRoomRepository.findById(id);
 
-        if(chatRoom.isEmpty()){
-            throw new IllegalArgumentException("ChatRoom with roomId " + id + " does not exist.");
-        }
+		if (chatRoom.isEmpty()) {
+			throw new IllegalArgumentException("ChatRoom with roomId " + id + " does not exist.");
+		}
 
-        message.setChatRoom(chatRoom.get());
-        Message savedMessage = messageRepository.save(message);
+		message.setChatRoom(chatRoom.get());
+		Message savedMessage = messageRepository.save(message);
 
-        try {
-            messagePublisher.sendMessage(savedMessage);
-        } catch (JsonProcessingException e) {
-            // log the exception, you might also want to alert your operations team
-            // depending on how you've set up logging and alerts
-            log.error("Failed to serialize message for RabbitMQ", e);
-            // since this is an unexpected error, we'll return a 500 Internal Server Error response
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+		try {
+			messagePublisher.sendMessage(savedMessage);
+		}
+		catch (JsonProcessingException e) {
+			// log the exception, you might also want to alert your operations team
+			// depending on how you've set up logging and alerts
+			log.error("Failed to serialize message for RabbitMQ", e);
+			// since this is an unexpected error, we'll return a 500 Internal Server Error
+			// response
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 
-        return ResponseEntity.ok(savedMessage);
-    }
+		return ResponseEntity.ok(savedMessage);
+	}
 
 }

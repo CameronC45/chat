@@ -6,7 +6,7 @@ import {
   addParticipant,
   getUsernames,
 } from "../../utils/Api";
-import { MdSend, MdAddCircleOutline } from "react-icons/md";
+import { MdSend } from "react-icons/md";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import "./ChatBox.css";
@@ -30,10 +30,16 @@ const ParticipantsList = ({ participants, onAddParticipant }) => {
   }, []);
 
   const handleAddParticipant = () => {
-    onAddParticipant(selectedUsername);
+    onAddParticipant({username: selectedUsername});  // Pass an object instead of a string.
     setSelectedUsername("");
     setIsModalOpen(false);
   };
+
+  // Get the list of participants' usernames.
+  const participantUsernames = participants.map(participant => participant.userId);
+
+  // Filter out usernames that are already in participants.
+  const nonParticipantUsernames = usernames.filter(username => !participantUsernames.includes(username.username));
 
   return (
     <div className="participants-list">
@@ -52,13 +58,13 @@ const ParticipantsList = ({ participants, onAddParticipant }) => {
         <div className="modal">
           <h2>Select a User</h2>
           <ul className="usernames-list">
-            {usernames.map((username) => (
+            {nonParticipantUsernames.map((username) => (
               <li
                 key={username.username}
                 className={`username-item ${
-                  username === selectedUsername ? "selected" : ""
+                  username.username === selectedUsername ? "selected" : ""
                 }`}
-                onClick={() => setSelectedUsername(username)}
+                onClick={() => setSelectedUsername(username.username)}
               >
                 {username.username}
               </li>
@@ -85,18 +91,23 @@ const ChatBox = ({ chatroom, username }) => {
 
   const handleSendMessage = () => {
     const recipients = chatroom.participants
-      .filter(participant => participant.userId !== username)
-      .map(participant => participant.userId);
-  
-    sendMessage(chatroom.roomId, newMessage, username, recipients)
-      .then((newMessage) => {
-        setMessages([...messages, newMessage]);
-        setNewMessage("");
-      });
+      .filter((participant) => participant.userId !== username)
+      .map((participant) => participant.userId);
+
+    sendMessage(
+      chatroom.roomId,
+      chatroom.name,
+      newMessage,
+      username,
+      recipients
+    ).then((newMessage) => {
+      setMessages([...messages, newMessage]);
+      setNewMessage("");
+    });
   };
 
-  const handleAddParticipant = (newParticipantUsername) => {
-    addParticipant(chatroom.roomId, newParticipantUsername.username).then(
+  const handleAddParticipant = (newParticipant) => {
+    addParticipant(chatroom.roomId, newParticipant.username).then( 
       (participant) => {
         chatroom.participants.push(participant);
         setShowParticipants(false);

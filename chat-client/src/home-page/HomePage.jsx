@@ -43,26 +43,28 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <div className="homepage">
-      <ChatList
-        chatrooms={chatrooms}
-        selectedChatroom={selectedChatroom}
-        onChatroomSelect={handleChatroomSelect}
-        onCreateChatroom={handleCreateChatroom}
-      />
-      {creatingChatroom ? (
-        <CreateChatRoomComponent
-          username={username}
-          onChatroomCreate={() => {
-            getChatRooms(username).then((rooms) => {
-              setChatrooms(rooms);
-              setSelectedChatroom(rooms[0]); // set the first chatroom as the selected one
-            });
-          }}
+    <div className="app-container">
+      <div className="homepage">
+        <ChatList
+          chatrooms={chatrooms}
+          selectedChatroom={selectedChatroom}
+          onChatroomSelect={handleChatroomSelect}
+          onCreateChatroom={handleCreateChatroom}
         />
-      ) : selectedChatroom ? (
-        <ChatBox chatroom={selectedChatroom} username={username} />
-      ) : null}
+        {creatingChatroom ? (
+          <CreateChatRoomComponent
+            username={username}
+            onChatroomCreate={() => {
+              getChatRooms(username).then((rooms) => {
+                setChatrooms(rooms);
+                setSelectedChatroom(rooms[0]); // set the first chatroom as the selected one
+              });
+            }}
+          />
+        ) : selectedChatroom ? (
+          <ChatBox chatroom={selectedChatroom} username={username} />
+        ) : null}
+      </div>
     </div>
   );
 };

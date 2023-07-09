@@ -9,17 +9,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class MessagePublisher {
 
-    private final AmqpTemplate amqpTemplate;
-    private final ObjectMapper objectMapper;
+	private final AmqpTemplate amqpTemplate;
 
-    public MessagePublisher(AmqpTemplate amqpTemplate, ObjectMapper objectMapper) {
-        this.amqpTemplate = amqpTemplate;
-        this.objectMapper = objectMapper;
-    }
+	private final ObjectMapper objectMapper;
 
-    public void sendMessage(Message message) throws JsonProcessingException {
-        String jsonMessage = objectMapper.writeValueAsString(message);
-        System.out.println("Sending: " + jsonMessage);
-        amqpTemplate.convertAndSend("messageExchange", "messageRoutingKey", jsonMessage);
-    }
+	public MessagePublisher(AmqpTemplate amqpTemplate, ObjectMapper objectMapper) {
+		this.amqpTemplate = amqpTemplate;
+		this.objectMapper = objectMapper;
+	}
+
+	public void sendMessage(Message message) throws JsonProcessingException {
+		String jsonMessage = objectMapper.writeValueAsString(message);
+		System.out.println("Sending: " + jsonMessage);
+		amqpTemplate.convertAndSend("messageExchange", "messageRoutingKey", jsonMessage);
+	}
+
 }

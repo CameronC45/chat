@@ -9,70 +9,70 @@ import java.time.LocalDateTime;
 @Table(name = "participants")
 public class Participant {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long participantId;
-    @Column(name = "user_id", nullable = false, length = 50)
-    private String userId;
-    @Column(name = "joined_at")
-    private LocalDateTime joinedAt;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long participantId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id")
-    @JsonBackReference
-    private ChatRoom chatRoom;
+	@Column(name = "user_id", nullable = false, length = 50)
+	private String userId;
 
-    @PrePersist
-    public void prePersist() {
-        joinedAt = LocalDateTime.now();
-    }
+	@Column(name = "joined_at")
+	private LocalDateTime joinedAt;
 
-    public Participant() {}
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "room_id")
+	@JsonBackReference
+	private ChatRoom chatRoom;
 
-    public Participant(String userId) {
-        this.userId = userId;
-        this.joinedAt = LocalDateTime.now();
-    }
+	@PrePersist
+	public void prePersist() {
+		joinedAt = LocalDateTime.now();
+	}
 
-    public Long getParticipantId() {
-        return participantId;
-    }
+	public Participant() {
+	}
 
-    public void setParticipantId(Long participantId) {
-        this.participantId = participantId;
-    }
+	public Participant(String userId) {
+		this.userId = userId;
+		this.joinedAt = LocalDateTime.now();
+	}
 
-    public String getUserId() {
-        return userId;
-    }
+	public Long getParticipantId() {
+		return participantId;
+	}
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+	public void setParticipantId(Long participantId) {
+		this.participantId = participantId;
+	}
 
-    public LocalDateTime getJoinedAt() {
-        return joinedAt;
-    }
+	public String getUserId() {
+		return userId;
+	}
 
-    public void setJoinedAt(LocalDateTime joinedAt) {
-        this.joinedAt = joinedAt;
-    }
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
-    public ChatRoom getChatRoom(){
-        return chatRoom;
-    }
+	public LocalDateTime getJoinedAt() {
+		return joinedAt;
+	}
 
-    public void setChatRoom(ChatRoom chatRoom){
-        this.chatRoom = chatRoom;
-    }
+	public void setJoinedAt(LocalDateTime joinedAt) {
+		this.joinedAt = joinedAt;
+	}
 
-    @Override
-    public String toString() {
-        return "Participant{" +
-                "participantId=" + participantId +
-                ", userId='" + userId + '\'' +
-                ", joinedAt=" + joinedAt +
-                ", chatRoomId=" + (chatRoom != null ? chatRoom.getRoomId() : null) +
-                '}';
-    }
+	public ChatRoom getChatRoom() {
+		return chatRoom;
+	}
+
+	public void setChatRoom(ChatRoom chatRoom) {
+		this.chatRoom = chatRoom;
+	}
+
+	@Override
+	public String toString() {
+		return "Participant{" + "participantId=" + participantId + ", userId='" + userId + '\'' + ", joinedAt="
+				+ joinedAt + ", chatRoomId=" + (chatRoom != null ? chatRoom.getRoomId() : null) + '}';
+	}
+
 }

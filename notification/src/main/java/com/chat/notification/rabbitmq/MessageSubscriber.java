@@ -18,37 +18,39 @@ import java.util.Set;
 @Service
 public class MessageSubscriber {
 
-    @Autowired
-    private NotificationRepository notificationRepository;
+	@Autowired
+	private NotificationRepository notificationRepository;
 
-    @Autowired
-    private RecipientRepository recipientRepository;
+	@Autowired
+	private RecipientRepository recipientRepository;
 
-    public void receiveMessage(String message) throws JsonProcessingException {
-        System.out.println("Received raw: " + message);
-        ObjectMapper objectMapper = new ObjectMapper();
-        NotificationDTO receivedNotification = objectMapper.readValue(message, NotificationDTO.class);
+	public void receiveMessage(String message) throws JsonProcessingException {
+		System.out.println("Received raw: " + message);
+		ObjectMapper objectMapper = new ObjectMapper();
+		NotificationDTO receivedNotification = objectMapper.readValue(message, NotificationDTO.class);
 
-        Notification notification = new Notification();
-        notification.setChat(receivedNotification.getChat());
-        notification.setContent(receivedNotification.getContent());
-        notification.setSenderId(receivedNotification.getSenderId());
-        notification.setSentAt(receivedNotification.getSentAt());
+		Notification notification = new Notification();
+		notification.setChat(receivedNotification.getChat());
+		notification.setContent(receivedNotification.getContent());
+		notification.setSenderId(receivedNotification.getSenderId());
+		notification.setSentAt(receivedNotification.getSentAt());
 
-        List<String> recipientUsernames = List.of(receivedNotification.getRecipientUsername());
-        Set<Recipient> recipients = new HashSet<>();
-        for (String username : recipientUsernames) {
-            Optional<Recipient> recipient = recipientRepository.findById(username);
-            if (recipient.isEmpty()) {
-                Recipient newRecipient = new Recipient(username);
-                recipientRepository.save(newRecipient);
-                recipients.add(newRecipient);
-            } else {
-                recipients.add(recipient.get());
-            }
-        }
-        notification.setRecipientUsernames(recipients);
+		List<String> recipientUsernames = List.of(receivedNotification.getRecipientUsername());
+		Set<Recipient> recipients = new HashSet<>();
+		for (String username : recipientUsernames) {
+			Optional<Recipient> recipient = recipientRepository.findById(username);
+			if (recipient.isEmpty()) {
+				Recipient newRecipient = new Recipient(username);
+				recipientRepository.save(newRecipient);
+				recipients.add(newRecipient);
+			}
+			else {
+				recipients.add(recipient.get());
+			}
+		}
+		notification.setRecipientUsernames(recipients);
 
-        notificationRepository.save(notification);
-    }
+		notificationRepository.save(notification);
+	}
+
 }

@@ -14,17 +14,17 @@ import java.util.stream.Collectors;
 @RequestMapping("/notification")
 public class NotificationRestController {
 
-    @Autowired
-    private NotificationRepository repository;
+	@Autowired
+	private NotificationRepository repository;
 
-    @GetMapping
-    public List<Notification> getAllNotifications() {
-        return repository.findAll();
-    }
+	@GetMapping
+	public List<Notification> getAllNotifications() {
+		return repository.findAll();
+	}
 
-    @GetMapping("/recipients/{username}")
-    public List<Notification> getNotificationsByUsername(@PathVariable String username) {
-        return repository.findByRecipientUsernames_Username(username);
-    }
+	@GetMapping("/recipients/{username}")
+	public List<Notification> getNotificationsByUsername(@PathVariable String username) {
+		return repository.findByRecipientUsernames_Username(username);
+	}
 
 }

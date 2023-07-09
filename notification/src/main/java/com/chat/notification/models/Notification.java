@@ -7,99 +7,93 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
-
 @Entity
 @Table(name = "notification")
 public class Notification {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long messageId;
-    @Column(name = "sender_id", nullable = false, length = 50)
-    private String senderId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long messageId;
 
-    @ManyToMany
-    @JoinTable(
-            name = "notification_recipient",
-            joinColumns = @JoinColumn(name = "notification_id"),
-            inverseJoinColumns = @JoinColumn(name = "recipient_username", referencedColumnName = "username")
-    )
-    private Set<Recipient> recipientUsernames;
+	@Column(name = "sender_id", nullable = false, length = 50)
+	private String senderId;
 
-    @Column(name = "chat", nullable = false)
-    private String chat;
+	@ManyToMany
+	@JoinTable(name = "notification_recipient", joinColumns = @JoinColumn(name = "notification_id"),
+			inverseJoinColumns = @JoinColumn(name = "recipient_username", referencedColumnName = "username"))
+	private Set<Recipient> recipientUsernames;
 
-    @Column(name = "content", nullable = false, length = 1000)
-    private String content;
-    @Column(name = "sent_at")
-    private String sentAt;
+	@Column(name = "chat", nullable = false)
+	private String chat;
 
+	@Column(name = "content", nullable = false, length = 1000)
+	private String content;
 
-    public Notification() {}
+	@Column(name = "sent_at")
+	private String sentAt;
 
-    public Notification(String senderId, String chat, String content, String sentAt) {
-        this.senderId = senderId;
-        this.chat = chat;
-        this.content = content;
-        this.sentAt = sentAt;
-    }
+	public Notification() {
+	}
 
-    public Long getMessageId() {
-        return messageId;
-    }
+	public Notification(String senderId, String chat, String content, String sentAt) {
+		this.senderId = senderId;
+		this.chat = chat;
+		this.content = content;
+		this.sentAt = sentAt;
+	}
 
-    public void setMessageId(Long messageId) {
-        this.messageId = messageId;
-    }
+	public Long getMessageId() {
+		return messageId;
+	}
 
-    public String getSenderId() {
-        return senderId;
-    }
+	public void setMessageId(Long messageId) {
+		this.messageId = messageId;
+	}
 
-    public void setSenderId(String senderId) {
-        this.senderId = senderId;
-    }
+	public String getSenderId() {
+		return senderId;
+	}
 
-    public Set<Recipient> getRecipientUsernames() {
-        return recipientUsernames;
-    }
+	public void setSenderId(String senderId) {
+		this.senderId = senderId;
+	}
 
-    public void setRecipientUsernames(Set<Recipient> recipientUsernames) {
-        this.recipientUsernames = recipientUsernames;
-    }
+	public Set<Recipient> getRecipientUsernames() {
+		return recipientUsernames;
+	}
 
-    public String getChat() {
-        return chat;
-    }
+	public void setRecipientUsernames(Set<Recipient> recipientUsernames) {
+		this.recipientUsernames = recipientUsernames;
+	}
 
-    public void setChat(String chat) {
-        this.chat = chat;
-    }
+	public String getChat() {
+		return chat;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public void setChat(String chat) {
+		this.chat = chat;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public String getSentAt() {
-        return sentAt;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public void setSentAt(String sentAt) {
-        this.sentAt = sentAt;
-    }
+	public String getSentAt() {
+		return sentAt;
+	}
 
+	public void setSentAt(String sentAt) {
+		this.sentAt = sentAt;
+	}
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "messageId=" + messageId +
-                ", senderId='" + senderId + '\'' +
-                ", content='" + content + '\'' +
-                ", sentAt=" + sentAt +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Message{" + "messageId=" + messageId + ", senderId='" + senderId + '\'' + ", content='" + content + '\''
+				+ ", sentAt=" + sentAt + '}';
+	}
+
 }
