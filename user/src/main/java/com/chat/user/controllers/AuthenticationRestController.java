@@ -4,6 +4,8 @@ import com.chat.user.models.User;
 import com.chat.user.repository.UserRepository;
 import com.chat.user.security.JwtUtil;
 import com.chat.user.security.MyUserDetailsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,6 +35,8 @@ public class AuthenticationRestController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	private static final Logger log = LoggerFactory.getLogger(AuthenticationRestController.class);
+
 	@Autowired
 	private JwtUtil jwt;
 
@@ -60,18 +64,13 @@ public class AuthenticationRestController {
 
 	@PostMapping("/validateToken")
 	public ResponseEntity<Boolean> validateToken(@RequestBody Map<String, String> tokenPayload) {
-		// Extract the token from the request body
 		String token = tokenPayload.get("token");
 
 		if (token == null) {
-			return ResponseEntity.badRequest().build(); // Return 400 Bad Request if there
-														// is no token
+			return ResponseEntity.badRequest().build();
 		}
-
-		// Validate the token
+		log.info("Validating JWT...");
 		boolean valid = jwt.validateToken(token);
-
-		// Return the result
 		return ResponseEntity.ok(valid);
 	}
 

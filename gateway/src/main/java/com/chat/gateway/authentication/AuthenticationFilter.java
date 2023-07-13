@@ -39,7 +39,6 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
 		}
 
 		String authHeader = exchange.getRequest().getCookies().getFirst("token").getValue();
-		logger.debug(authHeader, "Authorization Header: {}");
 
 		return validateTokenWithUserService(authHeader).flatMap(valid -> {
 			if (valid) {

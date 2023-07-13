@@ -28,11 +28,9 @@ const NavBar = () => {
       }
     };
 
-    fetchNotifications(); // Fetch when component mounts
+    fetchNotifications();
 
-    const intervalId = setInterval(fetchNotifications, 5000); // Fetch every 5 seconds
-
-    // Clear interval on component unmount
+    const intervalId = setInterval(fetchNotifications, 5000);    
     return () => clearInterval(intervalId);
   }, []);
 
